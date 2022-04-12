@@ -1,6 +1,8 @@
 # CosmoQuizz
 CosmoQuizz is a web app that provides kids with a controlled distraction (game) and motivates them to focus on their tests. Our goals are helping kids develop focus and emotional control, deal with frustration, and succeed in their academic goals.
+
 Developed and supported by Robbie Cha and Wei Chen.
+
 Project Status: MVP Demo
 
 ## About
