@@ -13,9 +13,14 @@ FOR kids who are having trouble paying attention, controlling impulsive behavior
 
 ### Technology Stack
 Frontend: Flutter/Dart
+
 Backend: Python
+
 Database: Firebase (noSQL)
+
 Platform: Multi-platform (mobile, web, desktop, and embedded devices)
+
 API: Heroku
+
 Game Engine: Flame
 
