@@ -16,6 +16,6 @@ Frontend: Flutter/Dart
 Backend: Python
 Database: Firebase (noSQL)
 Platform: Multi-platform (mobile, web, desktop, and embedded devices)
-Server: Heroku
+API: Heroku
 Game Engine: Flame
 
