@@ -20,7 +20,7 @@ class CosmoQuizz extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CosmoQuizz',
-      debugShowCheckedModeBanner: false,  // remove the debug banner
+      debugShowCheckedModeBanner: false,  // hide debug banner
       home: const MainPage(),
     );
   }
@@ -64,12 +64,13 @@ class _MainPageState extends State<MainPage> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(30)
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            automaticallyImplyLeading: false,   // no back arrow for going back to the previous page
+            automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
             actions: [
               // sign in button
               Center(
@@ -84,11 +85,11 @@ class _MainPageState extends State<MainPage> {
                   style: OutlinedButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Color.fromARGB(255, 33, 100, 243),
-                    padding: const EdgeInsets.all(20)
+                    padding: const EdgeInsets.all(20),
                   ),
                 ),
               ),
-              SizedBox(width: 40),
+              SizedBox(width: 50),
               // sign up button
               Center(
                 child: OutlinedButton(
@@ -102,7 +103,7 @@ class _MainPageState extends State<MainPage> {
                   style: OutlinedButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Color.fromARGB(255, 33, 54, 243),
-                    padding: const EdgeInsets.all(20)
+                    padding: const EdgeInsets.all(20),
                   ),
                 ),
               ),
@@ -121,7 +122,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       width: 500,
                       height: 400,
-                      child: Image.asset('assets/logo/CosmoQuizz_white.png')
+                      child: Image.asset('assets/logo/CosmoQuizz_white.png'),
                     ),
                   ),
                 ),
@@ -143,6 +144,20 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
+                /*
+                SizedBox(height: 30),
+                // use to test stuffs without login
+                Padding(
+                  padding: const EdgeInsets.only(right: 50.0),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'test',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
+                  ),
+                ),
+                */
               ]
             ),
           ),

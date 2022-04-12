@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
-  // register a new account
+  // create a new account
   static Future<User?> registration({
     required String username,
     required String email,
@@ -28,6 +28,11 @@ class Authentication {
       else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
       }
+      /*
+      else if (e.code == 'invalid-email') {
+        print('Invalid Email.');
+      }
+      */
     }
     catch (e) {
       print(e);
@@ -59,6 +64,14 @@ class Authentication {
       else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+      /*
+      else if (e.code == 'invalid-email') {
+        print('Invalid Email.');
+      }
+      else if (e.code == 'user-disabled') {
+        print('Your account is suspended.');
+      }
+      */
     }
     catch (e) {
       print(e);
@@ -67,7 +80,7 @@ class Authentication {
     return user;
   }
 
-  // recover account password
+  // password recovery
   static Future<User?> recoverPassword({
     required String email,
   })
@@ -83,6 +96,11 @@ class Authentication {
       if (e.code == 'auth/user-not-found') {
         print('We couldn\'t find an account with the email address provided');
       }
+      /*
+      else if (e.code == 'auth/invalid-email') {
+        print('Invalid Email.');
+      }
+      */
     }
     catch (e) {
       print(e);
@@ -91,6 +109,7 @@ class Authentication {
     return null;
   }
 
+  // refresh user status
   static Future<User?> refreshUser(User user) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/main.dart';
 import '/student/student_login.dart';
+import '/teacher/teacher_login.dart';
 import '/portal/signup_portal.dart';
 
 class LoginPortal extends StatefulWidget {
@@ -42,14 +43,15 @@ class _LoginPortalState extends State<LoginPortal> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 33, 100, 243), borderRadius: BorderRadius.circular(30)
+                color: Color.fromARGB(255, 33, 100, 243),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            automaticallyImplyLeading: false,   // no back arrow for going back to the previous page
+            automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
             actions: [
-              // return button
+              // back button
               Center(
                 child: OutlinedButton(
                   onPressed: () {
@@ -64,7 +66,7 @@ class _LoginPortalState extends State<LoginPortal> {
                       Icon(Icons.replay),
                       SizedBox(width: 5),
                       Text(
-                        "Return to Main Page",
+                        "Back to Main Page",
                         style: TextStyle(fontSize: 20),
                       )
                     ],
@@ -90,12 +92,12 @@ class _LoginPortalState extends State<LoginPortal> {
               children: <Widget>[
                 // set up logo
                 Padding(
-                  padding: const EdgeInsets.only(right: 30.0, top: 80.0),
+                  padding: const EdgeInsets.only(right: 30.0, top: 90.0),
                   child: Center(
                     child: Container(
                       width: 500,
                       height: 400,
-                      child: Image.asset('assets/logo/CosmoQuizz_white.png')
+                      child: Image.asset('assets/logo/CosmoQuizz_white.png'),
                     ),
                   ),
                 ),
@@ -135,7 +137,12 @@ class _LoginPortalState extends State<LoginPortal> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TeacherLogin()),
+                        );
+                      },
                       child: Text(
                         'Log In as Teacher',
                         style: TextStyle(color: Colors.white, fontSize: 25),
@@ -151,7 +158,7 @@ class _LoginPortalState extends State<LoginPortal> {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.only(right: 40.0),
                   child: TextButton(

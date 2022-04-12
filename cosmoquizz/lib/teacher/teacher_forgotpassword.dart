@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
-import './student_login.dart';
+import './teacher_login.dart';
 
-class StudentForgotPW extends StatefulWidget {
-  const StudentForgotPW({Key? key}) : super(key: key);
+class TeacherForgotPW extends StatefulWidget {
+  const TeacherForgotPW({Key? key}) : super(key: key);
 
   @override
-  State<StudentForgotPW> createState() => _StudentForgotPWState();
+  State<TeacherForgotPW> createState() => _TeacherForgotPWState();
 }
 
-class _StudentForgotPWState extends State<StudentForgotPW> {
+class _TeacherForgotPWState extends State<TeacherForgotPW> {
   final _recoveryFormKey = GlobalKey<FormState>();
 
   final _emailTextController = TextEditingController();
@@ -163,7 +163,7 @@ Widget emailSent(BuildContext context) {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => StudentLogin()),
+            MaterialPageRoute(builder: (context) => TeacherLogin()),
           );
         },
         child: Text(

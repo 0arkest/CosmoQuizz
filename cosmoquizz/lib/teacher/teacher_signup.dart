@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
-import '/api/student_api.dart';
-import '/api/models/student_model.dart';
+import '/api/teacher_api.dart';
+import '/api/models/teacher_model.dart';
 import '/portal/signup_portal.dart';
-import './student_login.dart';
-import './student_home.dart';
+import './teacher_login.dart';
+import './teacher_home.dart';
 
-class StudentSignUp extends StatefulWidget {
-  const StudentSignUp({Key? key}) : super(key: key);
+class TeacherSignUp extends StatefulWidget {
+  const TeacherSignUp({Key? key}) : super(key: key);
 
   @override
-  State<StudentSignUp> createState() => _StudentSignUpState();
+  State<TeacherSignUp> createState() => _TeacherSignUpState();
 }
 
-class _StudentSignUpState extends State<StudentSignUp> {
+class _TeacherSignUpState extends State<TeacherSignUp> {
   final _registerFormKey = GlobalKey<FormState>();
 
   final _usernameTextController = TextEditingController();
@@ -26,9 +25,10 @@ class _StudentSignUpState extends State<StudentSignUp> {
   final _firstNameTextController = TextEditingController();
   final _lastNameTextController = TextEditingController();
   final _schoolTextController = TextEditingController();
-  final _gradeTextController = TextEditingController();
+  final _subjectTextController = TextEditingController();
+  final _phoneTextController = TextEditingController();
   final _birthdayTextController = TextEditingController();
-  final _emergencyContactTextController = TextEditingController();
+  final _bioTextController = TextEditingController();
   
   final _focusUsername = FocusNode();
   final _focusEmail = FocusNode();
@@ -36,13 +36,14 @@ class _StudentSignUpState extends State<StudentSignUp> {
   final _focusFirstName = FocusNode();
   final _focusLastName = FocusNode();
   final _focusSchool = FocusNode();
-  final _focusGrade = FocusNode();
+  final _focusSubject = FocusNode();
+  final _focusPhone = FocusNode();
   final _focusBirthday = FocusNode();
-  final _focusEmergencyContact = FocusNode();
+  final _focusBio = FocusNode();
 
   bool _isProcessing = false;
 
-  Future<PostStudent>? _futureStudent;
+  Future<PostTeacher>? _futureTeacher;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +55,10 @@ class _StudentSignUpState extends State<StudentSignUp> {
         _focusFirstName.unfocus();
         _focusLastName.unfocus();
         _focusSchool.unfocus();
-        _focusGrade.unfocus();
+        _focusSubject.unfocus();
+        _focusPhone.unfocus();
         _focusBirthday.unfocus();
-        _focusEmergencyContact.unfocus();
+        _focusBio.unfocus();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -290,25 +292,49 @@ class _StudentSignUpState extends State<StudentSignUp> {
                           ),
                         ),
                         SizedBox(height: 15),
-                        // grade input field
+                        // subject input field
                         Padding(
                           padding: const EdgeInsets.only(right: 40.0),
                           child: Container(
                             width: 600,
                             child: TextFormField(
-                              controller: _gradeTextController,
-                              focusNode: _focusGrade,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ],
+                              controller: _subjectTextController,
+                              focusNode: _focusSubject,
                               validator: (value) => Validator.validateTextInput(textInput: value),
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                labelText: 'Grade',
-                                hintText: "Please Enter Your Current Grade",
+                                labelText: 'Subject',
+                                hintText: "Please Enter Your Subject",
                                 icon: Icon(
-                                  Icons.grade,
+                                  Icons.book,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderSide: BorderSide(color: Colors.red),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        // phone number input field
+                        Padding(
+                          padding: const EdgeInsets.only(right: 40.0),
+                          child: Container(
+                            width: 600,
+                            child: TextFormField(
+                              controller: _phoneTextController,
+                              focusNode: _focusPhone,
+                              validator: (value) => Validator.validateTextInput(textInput: value),
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                labelText: 'Phone Number',
+                                hintText: "Please Enter Your Phone Number",
+                                icon: Icon(
+                                  Icons.phone,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30.0),
@@ -350,21 +376,21 @@ class _StudentSignUpState extends State<StudentSignUp> {
                           ),
                         ),
                         SizedBox(height: 15),
-                        // phone number input field
+                        // biography input field
                         Padding(
                           padding: const EdgeInsets.only(right: 40.0),
                           child: Container(
                             width: 600,
                             child: TextFormField(
-                              controller: _emergencyContactTextController,
-                              focusNode: _focusEmergencyContact,
+                              controller: _bioTextController,
+                              focusNode: _focusBio,
                               validator: (value) => Validator.validateTextInput(textInput: value),
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                labelText: 'Phone Number',
-                                hintText: "Please Enter Your Phone Number",
+                                labelText: 'Biography',
+                                hintText: "Please Enter Your Biography",
                                 icon: Icon(
-                                  Icons.phone,
+                                  Icons.subject,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30.0),
@@ -398,9 +424,10 @@ class _StudentSignUpState extends State<StudentSignUp> {
                                         _focusFirstName.unfocus();
                                         _focusLastName.unfocus();
                                         _focusSchool.unfocus();
-                                        _focusGrade.unfocus();
+                                        _focusSubject.unfocus();
+                                        _focusPhone.unfocus();
                                         _focusBirthday.unfocus();
-                                        _focusEmergencyContact.unfocus();
+                                        _focusBio.unfocus();
                                         if (_registerFormKey.currentState!.validate()) {
                                           setState(() {
                                             _isProcessing = true;
@@ -411,12 +438,13 @@ class _StudentSignUpState extends State<StudentSignUp> {
                                             password: _passwordTextController.text,
                                           );
                                           setState(() {
-                                            _futureStudent = StudentAPI().createStudent(
+                                            _futureTeacher = TeacherAPI().createTeacher(
+                                              _bioTextController.text,
                                               _birthdayTextController.text,
-                                              _emergencyContactTextController.text,
                                               _firstNameTextController.text,
-                                              int.parse(_gradeTextController.text),
                                               _lastNameTextController.text,
+                                              _phoneTextController.text,
+                                              _subjectTextController.text,
                                               _schoolTextController.text,
                                               _usernameTextController.text,
                                               _emailTextController.text,
@@ -428,7 +456,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                                           if (user != null) {
                                             Navigator.of(context).pushAndRemoveUntil(
                                               MaterialPageRoute(
-                                                builder: (context) => StudentHome(),
+                                                builder: (context) => TeacherHome(),
                                               ),
                                               ModalRoute.withName('/'),
                                             );
@@ -455,7 +483,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                                     onPressed: () {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => StudentLogin()),
+                                        MaterialPageRoute(builder: (context) => TeacherLogin()),
                                       );
                                     },
                                     child: Text(

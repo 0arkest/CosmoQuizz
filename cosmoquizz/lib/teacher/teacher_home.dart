@@ -3,19 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
 import '/portal/login_portal.dart';
-import './student_profile/my_profile.dart';
-import './student_quiz/take_quiz.dart';
-import './student_grades/view_grades.dart';
+import './teacher_submissions/view_submissions.dart';
 
-class StudentHome extends StatefulWidget {
-  StudentHome({Key? key}) : super(key: key);
+class TeacherHome extends StatefulWidget {
+  TeacherHome({Key? key}) : super(key: key);
   final User user = FirebaseAuth.instance.currentUser!;
 
   @override
-  _StudentHomeState createState() => _StudentHomeState();
+  _TeacherHomeState createState() => _TeacherHomeState();
 }
 
-class _StudentHomeState extends State<StudentHome> {
+class _TeacherHomeState extends State<TeacherHome> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
 
@@ -45,40 +43,10 @@ class _StudentHomeState extends State<StudentHome> {
         ),
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
-          /*
-          // game button to test game. Remove after game completely built
-          Center(
-            child: OutlinedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(Icons.videogame_asset),
-                  SizedBox(width: 5),
-                  Text("Game(beta)", style: TextStyle(fontSize: 20)),
-                ],
-              ),
-              style: OutlinedButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
-                padding: const EdgeInsets.all(20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 120),
-          */
           // profile button
           Center(
             child: OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyProfile()),
-                );
-              },
+              onPressed: () {},
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -101,22 +69,17 @@ class _StudentHomeState extends State<StudentHome> {
             ),
           ),
           SizedBox(width: 40),
-          // take quiz button
+          // assign quiz button
           Center(
             child: OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TakeQuiz()),
-                );
-              },
+              onPressed: () {},
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Icon(Icons.assignment),
                   SizedBox(width: 5),
                   Text(
-                    "Take Quiz",
+                    "Assign Quiz",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -132,13 +95,13 @@ class _StudentHomeState extends State<StudentHome> {
             ),
           ),
           SizedBox(width: 40),
-          // view grades button
+          // view submission button
           Center(
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ViewGrades()),
+                  MaterialPageRoute(builder: (context) => ViewSubmissions()),
                 );
               },
               child: Row(
@@ -147,7 +110,7 @@ class _StudentHomeState extends State<StudentHome> {
                   Icon(Icons.assignment_turned_in),
                   SizedBox(width: 5),
                   Text(
-                    "View Grades",
+                    "View Submissions",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -257,7 +220,7 @@ class _StudentHomeState extends State<StudentHome> {
                       style: TextStyle(fontSize: 20),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Student',
+                          text: 'Teacher',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

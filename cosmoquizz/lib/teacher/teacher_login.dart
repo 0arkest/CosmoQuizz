@@ -5,18 +5,18 @@ import 'package:firebase_core/firebase_core.dart';
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
 import '/portal/login_portal.dart';
-import './student_forgotpassword.dart';
-import './student_signup.dart';
-import './student_home.dart';
+import './teacher_forgotpassword.dart';
+import './teacher_signup.dart';
+import './teacher_home.dart';
 
-class StudentLogin extends StatefulWidget {
-  const StudentLogin({Key? key}) : super(key: key);
+class TeacherLogin extends StatefulWidget {
+  const TeacherLogin({Key? key}) : super(key: key);
 
   @override
-  State<StudentLogin> createState() => _StudentLoginState();
+  State<TeacherLogin> createState() => _TeacherLoginState();
 }
 
-class _StudentLoginState extends State<StudentLogin> {
+class _TeacherLoginState extends State<TeacherLogin> {
   final _loginFormKey = GlobalKey<FormState>();
 
   final _emailTextController = TextEditingController();
@@ -27,14 +27,14 @@ class _StudentLoginState extends State<StudentLogin> {
 
   bool _isProcessing = false;
 
-  // go to student home page if already signed in
+  // go to teacher home page if already signed in
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => StudentHome(),
+          builder: (context) => TeacherHome(),
         ),
       );
     }
@@ -177,7 +177,7 @@ class _StudentLoginState extends State<StudentLogin> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => StudentForgotPW()),
+                                    MaterialPageRoute(builder: (context) => TeacherForgotPW()),
                                   );
                                 },
                                 child: Text(
@@ -217,7 +217,7 @@ class _StudentLoginState extends State<StudentLogin> {
                                               if (user != null) {
                                                 Navigator.of(context).pushReplacement(
                                                   MaterialPageRoute(
-                                                    builder: (context) => StudentHome(),
+                                                    builder: (context) => TeacherHome(),
                                                   ),
                                                 );
                                               }
@@ -243,7 +243,7 @@ class _StudentLoginState extends State<StudentLogin> {
                                         onPressed: (){
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => StudentSignUp()),
+                                            MaterialPageRoute(builder: (context) => TeacherSignUp()),
                                           );
                                         },
                                         child: Text(
