@@ -32,4 +32,18 @@ class TeacherAPI {
       throw Exception('Failed to create teacher.');
     }
   }
+
+  // get teacher by username
+  Future<GetTeacher> getTeacher(String username) async {
+    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/teachers/${username}'));
+
+    // if success
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      GetTeacher result = GetTeacher.fromJson(jsonResponse);
+      return result;
+    } else {
+      throw Exception('Failed to retrieve teacher info.');
+    }
+  }
 }

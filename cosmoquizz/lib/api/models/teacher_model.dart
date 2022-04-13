@@ -37,7 +37,6 @@ class PostTeacher {
   }
 }
 
-/*
 // get teacher by username
 class GetTeacher {
   final Data? data;
@@ -61,9 +60,9 @@ class Data {
   final String? lastName;
   final String? phone;
   final String? school;
-  final String? students;
   final String? subject;
   final String? username;
+  final List<dynamic>? students;
 
   Data({
     required this.bio,
@@ -73,9 +72,9 @@ class Data {
     required this.lastName,
     required this.phone,
     required this.school,
-    required this.students,
     required this.subject,
     required this.username,
+    required this.students,
   });
 
   factory Data.fromJson(Map<String, dynamic> parsedJson) {
@@ -87,10 +86,9 @@ class Data {
       lastName: parsedJson["lastName"],
       phone: parsedJson["phone"],
       school: parsedJson["school"],
-      students: parsedJson["students"],
       subject: parsedJson["subject"],
       username: parsedJson["username"],
+      students: List<dynamic>.from(parsedJson["students"].map((x) => x)),
     );
   }
 }
-*/

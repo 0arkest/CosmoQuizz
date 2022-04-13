@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
 import '/portal/login_portal.dart';
+import './teacher_profile/my_profile.dart';
 import './teacher_submissions/view_submissions.dart';
 
 class TeacherHome extends StatefulWidget {
@@ -46,7 +47,12 @@ class _TeacherHomeState extends State<TeacherHome> {
           // profile button
           Center(
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyProfile()),
+                );
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
