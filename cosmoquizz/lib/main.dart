@@ -46,7 +46,7 @@ class _MainPageState extends State<MainPage> {
       (value) =>
       DropdownMenuItem(
         value: value,
-        child: Text(value, style: TextStyle(color: Colors.purple, fontSize: 20)),
+        child: Text(value, style: TextStyle(color: Colors.white, fontSize: 20)),
       )
     ).toList();
   }
@@ -57,7 +57,7 @@ class _MainPageState extends State<MainPage> {
       (value) =>
       DropdownMenuItem(
         value: value,
-        child: Text(value, style: TextStyle(color: Colors.purple, fontSize: 20)),
+        child: Text(value, style: TextStyle(color: Colors.white, fontSize: 20)),
       )
     ).toList();
   }
@@ -129,6 +129,7 @@ class _MainPageState extends State<MainPage> {
                   },
                   hint: Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 20)),
                   icon: const Icon(Icons.arrow_drop_down),
+                  dropdownColor: Colors.lightBlue,
                   underline: SizedBox(),
                 ),
               ),
@@ -161,6 +162,7 @@ class _MainPageState extends State<MainPage> {
                   },
                   hint: Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 20)),
                   icon: const Icon(Icons.arrow_drop_down),
+                  dropdownColor: Colors.blueAccent,
                   underline: SizedBox(),
                 ),
               ),

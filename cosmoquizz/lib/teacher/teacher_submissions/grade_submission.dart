@@ -125,6 +125,10 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                   for (var i = 0; i < totalAnswers; i++) {
                     questions.add(snapshot.data!.data!.submission![i].description);
                   }
+                  List<dynamic> correctAnswer = [];
+                  for (var i = 0; i < totalAnswers; i++) {
+                    correctAnswer.add(snapshot.data!.data!.submission![i].answer);
+                  }
                   List<dynamic> submissions = [];
                   for (var i = 0; i < totalAnswers; i++) {
                     submissions.add(snapshot.data!.data!.submission![i].providedAnswer);
@@ -156,6 +160,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                   child: Container(
                                     child: Text(
                                       'Choice: ${snapshot.data!.data!.submission![i].options}\n'
+                                      'Correct Answer: ${correctAnswer[i]}\n'
                                       'Student Answer: ${submissions[i]}',
                                       style: TextStyle(fontSize: 20),
                                     ),
@@ -219,6 +224,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                   child: Container(
                                     child: Text(
                                       'Question: ${questions[i]}\n'
+                                      'Correct Answer: ${correctAnswer[i]}\n'
                                       'Student Answer: ${submissions[i]}',
                                       style: TextStyle(fontSize: 20),
                                     ),
