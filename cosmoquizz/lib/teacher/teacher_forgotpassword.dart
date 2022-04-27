@@ -20,6 +20,8 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
 
   bool _isProcessing = false;
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +31,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Password Recovery", style: TextStyle(fontSize: 25)),
-          backgroundColor: Colors.green,
+          backgroundColor: _themeColor,
         ),
         body: SingleChildScrollView(
           child: Align(
@@ -117,7 +119,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color.fromARGB(255, 33, 77, 243),
+                                        primary: _themeColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -146,6 +148,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
 
 // pop-up message after clicked recover password button
 Widget emailConfirmation(BuildContext context) {
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
   return AlertDialog(
     title: Text('Email Sent!', style: TextStyle(fontSize: 20)),
     content: Column(
@@ -170,7 +173,7 @@ Widget emailConfirmation(BuildContext context) {
         child: Text(
           'Return to Login Page',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
+            color: _themeColor,
             fontSize: 16,
           ),
         ),
@@ -183,7 +186,7 @@ Widget emailConfirmation(BuildContext context) {
         child: Text(
           'Close',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 77, 243),
+            color: _themeColor,
             fontSize: 16,
           ),
         ),

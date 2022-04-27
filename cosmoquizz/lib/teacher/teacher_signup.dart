@@ -43,6 +43,8 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
 
   bool _isProcessing = false;
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
   Future<PostTeacher>? _futureTeacher;
 
   @override
@@ -88,7 +90,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Colors.lightGreen,
+                  backgroundColor: _themeColor,
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -469,7 +471,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                                         style: TextStyle(color: Colors.white, fontSize: 25),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color.fromARGB(255, 33, 54, 243),
+                                        primary: _themeColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -489,7 +491,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                                     },
                                     child: Text(
                                       'Already Have an Account? Sign In!',
-                                      style: TextStyle(color: Color.fromARGB(255, 33, 100, 243), fontSize: 18),
+                                      style: TextStyle(color: _themeColor, fontSize: 18),
                                     ),
                                   ),
                                 ),

@@ -15,6 +15,8 @@ class DisplayTests extends StatefulWidget {
 class _DisplayTestsState extends State<DisplayTests> {
   late Future<GetAllTests> _futureTest;
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +40,7 @@ class _DisplayTestsState extends State<DisplayTests> {
             ],
           ),
         ),
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
           // back button
@@ -62,7 +65,7 @@ class _DisplayTestsState extends State<DisplayTests> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: _themeColor,
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -108,7 +111,7 @@ class _DisplayTestsState extends State<DisplayTests> {
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blue,
+                                primary: _themeColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -138,6 +141,8 @@ class TestConfirmation extends StatelessWidget {
 
   TestConfirmation({required this.testName});
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -164,7 +169,7 @@ class TestConfirmation extends StatelessWidget {
           child: Text(
             'Yes',
             style: TextStyle(
-              color: Color.fromARGB(255, 33, 100, 243),
+              color: _themeColor,
               fontSize: 16,
             ),
           ),
@@ -176,7 +181,7 @@ class TestConfirmation extends StatelessWidget {
           child: Text(
             'Back',
             style: TextStyle(
-              color: Color.fromARGB(255, 33, 100, 243),
+              color: _themeColor,
               fontSize: 16,
             ),
           ),

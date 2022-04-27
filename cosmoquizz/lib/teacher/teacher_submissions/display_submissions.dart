@@ -16,6 +16,8 @@ class DisplaySubmissions extends StatefulWidget {
 class _DisplaySubmissionsState extends State<DisplaySubmissions> {
   late Future<GetSubmissionsOfTest> _futureSubmissions;
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +41,7 @@ class _DisplaySubmissionsState extends State<DisplaySubmissions> {
             ],
           ),
         ),
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
           // back button
@@ -63,7 +66,7 @@ class _DisplaySubmissionsState extends State<DisplaySubmissions> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: _themeColor,
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -112,7 +115,7 @@ class _DisplaySubmissionsState extends State<DisplaySubmissions> {
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.blue,
+                                primary: _themeColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -145,6 +148,7 @@ class UserConfirmation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _themeColor = Color.fromARGB(255, 60, 138, 62);
     return AlertDialog(
       title: Text('Check Submissions?', style: TextStyle(fontSize: 20)),
       content: Column(
@@ -169,7 +173,7 @@ class UserConfirmation extends StatelessWidget {
           child: Text(
             'Yes',
             style: TextStyle(
-              color: Color.fromARGB(255, 33, 100, 243),
+              color: _themeColor,
               fontSize: 16,
             ),
           ),
@@ -181,7 +185,7 @@ class UserConfirmation extends StatelessWidget {
           child: Text(
             'Back',
             style: TextStyle(
-              color: Color.fromARGB(255, 33, 100, 243),
+              color: _themeColor,
               fontSize: 16,
             ),
           ),

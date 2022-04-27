@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/validator.dart';
@@ -9,7 +8,6 @@ import '/api/service/submission_service.dart';
 import '/api/model/test_model.dart';
 import '/api/model/submission_model.dart';
 import '/student/student_quiz/display_quizzes.dart';
-import '/student/student_home.dart';
 
 class TakeQuiz extends StatefulWidget {
   final String quizName;
@@ -353,11 +351,11 @@ Widget submitConfirmation(BuildContext context) {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => StudentHome()),
+            MaterialPageRoute(builder: (context) => DisplayQuizzes()),
           );
         },
         child: Text(
-          'Return to Home Page',
+          'Return to Quiz Page',
           style: TextStyle(
             color: Color.fromARGB(255, 33, 100, 243),
             fontSize: 16,

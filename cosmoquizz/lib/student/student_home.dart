@@ -319,7 +319,9 @@ class _StudentHomeState extends State<StudentHome> {
                         onPressed: () async {
                           if (_currentUser.emailVerified) {
                             print("You have already verified the email.");
-                            _buttonColor = Colors.grey;
+                            setState(() {
+                              _buttonColor = Colors.grey;
+                            });
                           }
                           else {
                             setState(() {

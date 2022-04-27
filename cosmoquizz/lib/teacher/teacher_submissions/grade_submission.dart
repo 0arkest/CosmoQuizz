@@ -24,6 +24,11 @@ class _GradeSubmissionState extends State<GradeSubmission> {
 
   final _focusGrade = FocusNode();
 
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
+
+  List<Color> _correctButtonColor = [];
+  List<Color> _wrongButtonColor = [];
+
   late String _username;
   late String _testName;
 
@@ -74,8 +79,31 @@ class _GradeSubmissionState extends State<GradeSubmission> {
               ],
             ),
           ),
+          backgroundColor: Colors.green,
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
+            // score
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    totalScore = addPoints(score);
+                  });
+                },
+                child: Text(
+                  'Auto Calculated Score\n'
+                  'Score = ${totalScore.toStringAsFixed(0)}',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: _themeColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 60),
             // back button
             Center(
               child: OutlinedButton(
@@ -98,7 +126,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                  backgroundColor: _themeColor,
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -133,6 +161,12 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                   for (var i = 0; i < totalAnswers; i++) {
                     submissions.add(snapshot.data!.data!.submission![i].providedAnswer);
                   }
+                  for (var i = 0; i < totalAnswers; i++) {
+                    _correctButtonColor.add(Colors.grey);
+                  }
+                  for (var i = 0; i < totalAnswers; i++) {
+                    _wrongButtonColor.add(Colors.grey);
+                  }
                   return Form(
                     key: _gradeFormKey,
                     child: Column(
@@ -151,18 +185,21 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                     child: Text(
                                       'Question: ${questions[i]}',
                                       style: TextStyle(fontSize: 20),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
+                                SizedBox(height: 20),
                                 // question choice
                                 Padding(
                                   padding: const EdgeInsets.only(),
                                   child: Container(
                                     child: Text(
-                                      'Choice: ${snapshot.data!.data!.submission![i].options}\n'
-                                      'Correct Answer: ${correctAnswer[i]}\n'
+                                      'Choice: ${snapshot.data!.data!.submission![i].options}\n\n'
+                                      'Correct Answer: ${correctAnswer[i]}\n\n'
                                       'Student Answer: ${submissions[i]}',
                                       style: TextStyle(fontSize: 20),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
@@ -174,11 +211,24 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                       size: Size(66, 66),
                                       child: ClipOval(
                                         child: Material(
-                                          color: Colors.green,
+                                          color: _correctButtonColor[i],
                                           child: InkWell(
                                             splashColor: Colors.green,
                                             onTap: () {
                                               score[i] = points;
+                                              setState(() {
+                                                totalScore = addPoints(score);
+                                              });
+                                              if (_correctButtonColor[i] == Colors.grey) {
+                                                setState(() {
+                                                  _correctButtonColor[i] = Colors.green;
+                                                  _wrongButtonColor[i] = Colors.grey;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _correctButtonColor[i] = Colors.grey;
+                                                });
+                                              }
                                             },
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -196,11 +246,24 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                       size: Size(66, 66),
                                       child: ClipOval(
                                         child: Material(
-                                          color: Colors.red,
+                                          color: _wrongButtonColor[i],
                                           child: InkWell(
                                             splashColor: Colors.red,
                                             onTap: () {
                                               score[i] = 0;
+                                              setState(() {
+                                                totalScore = addPoints(score);
+                                              });
+                                              if (_wrongButtonColor[i] == Colors.grey) {
+                                                setState(() {
+                                                  _wrongButtonColor[i] = Colors.red;
+                                                  _correctButtonColor[i] = Colors.grey;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _wrongButtonColor[i] = Colors.grey;
+                                                });
+                                              }
                                             },
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -223,10 +286,11 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                   padding: const EdgeInsets.only(),
                                   child: Container(
                                     child: Text(
-                                      'Question: ${questions[i]}\n'
-                                      'Correct Answer: ${correctAnswer[i]}\n'
+                                      'Question: ${questions[i]}\n\n'
+                                      'Correct Answer: ${correctAnswer[i]}\n\n'
                                       'Student Answer: ${submissions[i]}',
                                       style: TextStyle(fontSize: 20),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
                                 ),
@@ -238,11 +302,24 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                       size: Size(66, 66),
                                       child: ClipOval(
                                         child: Material(
-                                          color: Colors.green,
+                                          color: _correctButtonColor[i],
                                           child: InkWell(
                                             splashColor: Colors.green,
                                             onTap: () {
                                               score[i] = points;
+                                              setState(() {
+                                                totalScore = addPoints(score);
+                                              });
+                                              if (_correctButtonColor[i] == Colors.grey) {
+                                                setState(() {
+                                                  _correctButtonColor[i] = Colors.green;
+                                                  _wrongButtonColor[i] = Colors.grey;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _correctButtonColor[i] = Colors.grey;
+                                                });
+                                              }
                                             },
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -260,11 +337,24 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                       size: Size(66, 66),
                                       child: ClipOval(
                                         child: Material(
-                                          color: Colors.red,
+                                          color: _wrongButtonColor[i],
                                           child: InkWell(
                                             splashColor: Colors.red,
                                             onTap: () {
                                               score[i] = 0;
+                                              setState(() {
+                                                totalScore = addPoints(score);
+                                              });
+                                              if (_wrongButtonColor[i] == Colors.grey) {
+                                                setState(() {
+                                                  _wrongButtonColor[i] = Colors.red;
+                                                  _correctButtonColor[i] = Colors.grey;
+                                                });
+                                              } else {
+                                                setState(() {
+                                                  _wrongButtonColor[i] = Colors.grey;
+                                                });
+                                              }
                                             },
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -283,31 +373,6 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                               ]
                             ],
                           ),
-                        SizedBox(height: 30),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  totalScore = addPoints(score);
-                                });
-                              },
-                              child: Text(
-                                'Auto Calculated Score\n'
-                                'Score = ${totalScore.toStringAsFixed(0)}',
-                                style: TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.blue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         SizedBox(height: 30),
                         // grade input field
                         Padding(
@@ -377,7 +442,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                         style: TextStyle(color: Colors.white, fontSize: 20),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.blue,
+                                        primary: _themeColor,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -405,6 +470,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
 
 // pop-up message after clicked submit grade button
 Widget submitConfirmation(BuildContext context) {
+  final _themeColor = Color.fromARGB(255, 60, 138, 62);
   return AlertDialog(
     title: Text('Submitted Successfully!', style: TextStyle(fontSize: 20)),
     content: Column(
@@ -429,7 +495,7 @@ Widget submitConfirmation(BuildContext context) {
         child: Text(
           'Return to Home Page',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
+            color: _themeColor,
             fontSize: 16,
           ),
         ),

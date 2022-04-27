@@ -18,7 +18,7 @@ class _TeacherHomeState extends State<TeacherHome> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
 
-  Color _buttonColor = Color.fromARGB(255, 33, 89, 243);
+  Color _themeColor = Color.fromARGB(255, 60, 138, 62);
   
   late User _currentUser;
 
@@ -67,7 +67,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: _themeColor,
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -93,7 +93,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: _themeColor,
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -124,7 +124,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: _themeColor,
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -205,7 +205,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 33, 89, 243),
+                        color: _themeColor,
                       )
                     ),
                   ],
@@ -288,7 +288,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                         onPressed: () async {
                           if (_currentUser.emailVerified) {
                             print("You have already verified the email.");
-                            _buttonColor = Colors.grey;
+                            _themeColor = Colors.grey;
                           }
                           else {
                             setState(() {
@@ -305,7 +305,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: _buttonColor,
+                          primary: _themeColor,
                           padding: const EdgeInsets.all(15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

@@ -41,6 +41,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
             ],
           ),
         ),
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
           // back button
@@ -62,7 +63,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                backgroundColor: Color.fromARGB(255, 60, 138, 62),
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
