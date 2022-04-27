@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '/api/student_api.dart';
-import '/api/models/student_model.dart';
+import '/api/service/teacher_service.dart';
+import '/api/model/teacher_model.dart';
 
-class MyProfile extends StatefulWidget {
-  MyProfile({Key? key}) : super(key: key);
+class DisplayProfile extends StatefulWidget {
+  DisplayProfile({Key? key}) : super(key: key);
   final User user = FirebaseAuth.instance.currentUser!;
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _DisplayProfileState createState() => _DisplayProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _DisplayProfileState extends State<DisplayProfile> {
   late User _currentUser;
 
-  late Future<GetStudent> _futureStudent;
+  late Future<GetTeacher> _futureTeacher;
 
   @override
   void initState() {
     _currentUser = widget.user;
     super.initState();
-    _futureStudent = StudentAPI().getStudent(_currentUser.displayName!);
+    _futureTeacher = TeacherService().getTeacher(_currentUser.displayName!);
   }
 
   @override
@@ -74,8 +74,8 @@ class _MyProfileState extends State<MyProfile> {
         ]
       ),
       body: SingleChildScrollView(
-        child: FutureBuilder<GetStudent>(
-          future: _futureStudent,
+        child: FutureBuilder<GetTeacher>(
+          future: _futureTeacher,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Align(
@@ -121,38 +121,6 @@ class _MyProfileState extends State<MyProfile> {
                           SizedBox(width: 5),
                           Text(
                             'Email: ${snapshot.data!.data!.email!}',
-                            style: TextStyle(fontSize: 20),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    // display birthday
-                    Padding(
-                      padding: const EdgeInsets.only(right: 40.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Icon(Icons.date_range),
-                          SizedBox(width: 5),
-                          Text(
-                            'Birthday: ${snapshot.data!.data!.birthday!}',
-                            style: TextStyle(fontSize: 20),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    // display phone number
-                    Padding(
-                      padding: const EdgeInsets.only(right: 40.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Icon(Icons.phone),
-                          SizedBox(width: 5),
-                          Text(
-                            'Phone Number: ${snapshot.data!.data!.emergencyContact!}',
                             style: TextStyle(fontSize: 20),
                           )
                         ],
@@ -207,16 +175,64 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
                     SizedBox(height: 15),
-                    // display grade
+                    // display subject
                     Padding(
                       padding: const EdgeInsets.only(right: 40.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Icon(Icons.grade),
+                          Icon(Icons.book),
                           SizedBox(width: 5),
                           Text(
-                            'Grade: ${snapshot.data!.data!.grade!}',
+                            'Subject: ${snapshot.data!.data!.subject!}',
+                            style: TextStyle(fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    // display phone number
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(Icons.phone),
+                          SizedBox(width: 5),
+                          Text(
+                            'Phone Number: ${snapshot.data!.data!.phone!}',
+                            style: TextStyle(fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    // display birthday
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(Icons.date_range),
+                          SizedBox(width: 5),
+                          Text(
+                            'Birthday: ${snapshot.data!.data!.birthday!}',
+                            style: TextStyle(fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 15),
+                    // display biography
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(Icons.subject),
+                          SizedBox(width: 5),
+                          Text(
+                            'Biography: ${snapshot.data!.data!.bio!}',
                             style: TextStyle(fontSize: 20),
                           )
                         ],

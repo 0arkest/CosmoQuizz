@@ -111,7 +111,7 @@ class _StudentForgotPWState extends State<StudentForgotPW> {
                                           // pop-up message
                                           showDialog(
                                             context: context,
-                                            builder: (BuildContext context) => emailSent(context),
+                                            builder: (BuildContext context) => emailConfirmation(context),
                                           );
                                         }
                                       },
@@ -144,7 +144,7 @@ class _StudentForgotPWState extends State<StudentForgotPW> {
 }
 
 // pop-up message after clicked recover password button
-Widget emailSent(BuildContext context) {
+Widget emailConfirmation(BuildContext context) {
   return AlertDialog(
     title: Text('Email Sent!', style: TextStyle(fontSize: 20)),
     content: Column(

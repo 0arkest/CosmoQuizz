@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
-import '/portal/login_portal.dart';
+import '/main.dart';
 import './student_forgotpassword.dart';
 import './student_signup.dart';
 import './student_home.dart';
@@ -59,7 +59,7 @@ class _StudentLoginState extends State<StudentLogin> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPortal()),
+                    MaterialPageRoute(builder: (context) => MainPage()),
                   );
                 },
                 child: Row(
@@ -68,7 +68,7 @@ class _StudentLoginState extends State<StudentLogin> {
                     Icon(Icons.replay),
                     SizedBox(width: 5),
                     Text(
-                      "Back to Portal Page",
+                      "Back to Main Page",
                       style: TextStyle(fontSize: 20),
                     )
                   ],

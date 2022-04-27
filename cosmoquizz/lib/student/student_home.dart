@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
-import '/portal/login_portal.dart';
-import './student_profile/my_profile.dart';
-import './student_quiz/take_quiz.dart';
-import './student_grades/view_grades.dart';
+import '/main.dart';
+import './student_profile/display_profile.dart';
+import './student_quiz/display_quizzes.dart';
+import './student_grades/display_grades.dart';
 
 class StudentHome extends StatefulWidget {
   StudentHome({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _StudentHomeState extends State<StudentHome> {
             children: <Widget>[
               Icon(Icons.home),
               SizedBox(width: 15),
-              Text("Home", style: TextStyle(fontSize: 25)),
+              Text("Student Home", style: TextStyle(fontSize: 25)),
             ],
           ),
         ),
@@ -78,6 +78,7 @@ class _StudentHomeState extends State<StudentHome> {
                   context,
                   MaterialPageRoute(builder: (context) => MyProfile()),
                 );
+                
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -107,7 +108,7 @@ class _StudentHomeState extends State<StudentHome> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TakeQuiz()),
+                  MaterialPageRoute(builder: (context) => DisplayQuizzes()),
                 );
               },
               child: Row(
@@ -138,7 +139,7 @@ class _StudentHomeState extends State<StudentHome> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ViewGrades()),
+                  MaterialPageRoute(builder: (context) => DisplayGrades()),
                 );
               },
               child: Row(
@@ -178,7 +179,7 @@ class _StudentHomeState extends State<StudentHome> {
                     });
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => LoginPortal(),
+                        builder: (context) => MainPage(),
                       ),
                     );
                   },
@@ -242,36 +243,8 @@ class _StudentHomeState extends State<StudentHome> {
                 ),
               )
             ),
-            SizedBox(height: 15),
-            // display identity
-            Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(Icons.perm_identity),
-                  SizedBox(width: 5),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Identity: ',
-                      style: TextStyle(fontSize: 20),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Student',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 33, 89, 243),
-                          )
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            // email verification status
             SizedBox(height: 30),
+            // email verification status
             _currentUser.emailVerified
               // if already verified
               ? Row(

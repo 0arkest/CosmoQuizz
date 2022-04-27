@@ -5,7 +5,7 @@ class Validator {
     }
 
     if (textInput.isEmpty) {
-      return 'This field can\'t be blank';
+      return 'This field cannot be left blank';
     }
 
     return null;
@@ -17,7 +17,7 @@ class Validator {
     }
 
     if (username.isEmpty) {
-      return 'Username can\'t be blank';
+      return 'Username can\'t be empty';
     }
 
     return null;
@@ -33,7 +33,7 @@ class Validator {
     );
 
     if (email.isEmpty) {
-      return 'Email can\'t be blank';
+      return 'Email can\'t be empty';
     }
     else if (!emailRegExp.hasMatch(email)) {
       return 'Please enter a correct email';
@@ -48,7 +48,7 @@ class Validator {
     }
 
     if (password.isEmpty) {
-      return 'Password can\'t be blank';
+      return 'Password can\'t be empty';
     }
     else if (password.length < 6) {
       return 'The length of password should be greater than 5';

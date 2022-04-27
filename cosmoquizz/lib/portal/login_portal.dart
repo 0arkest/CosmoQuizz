@@ -21,7 +21,7 @@ class _LoginPortalState extends State<LoginPortal> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background/space.jpg"),
+              image: AssetImage("assets/background/space_1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -137,11 +137,12 @@ class _LoginPortalState extends State<LoginPortal> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () {/*
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => TeacherLogin()),
                         );
+                        */
                       },
                       child: Text(
                         'Log In as Teacher',

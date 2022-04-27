@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
-import '/portal/login_portal.dart';
-import './teacher_profile/my_profile.dart';
-import './teacher_submissions/view_submissions.dart';
+import '/main.dart';
+import './teacher_profile/display_profile.dart';
+import './teacher_submissions/display_tests.dart';
 
 class TeacherHome extends StatefulWidget {
   TeacherHome({Key? key}) : super(key: key);
@@ -38,10 +38,11 @@ class _TeacherHomeState extends State<TeacherHome> {
             children: <Widget>[
               Icon(Icons.home),
               SizedBox(width: 15),
-              Text("Home", style: TextStyle(fontSize: 25)),
+              Text("Teacher Home", style: TextStyle(fontSize: 25)),
             ],
           ),
         ),
+        backgroundColor: Colors.green,
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
           // profile button
@@ -50,7 +51,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyProfile()),
+                  MaterialPageRoute(builder: (context) => DisplayProfile()),
                 );
               },
               child: Row(
@@ -85,7 +86,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                   Icon(Icons.assignment),
                   SizedBox(width: 5),
                   Text(
-                    "Assign Quiz",
+                    "Create Quiz",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -107,7 +108,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ViewSubmissions()),
+                  MaterialPageRoute(builder: (context) => DisplayTests()),
                 );
               },
               child: Row(
@@ -116,7 +117,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                   Icon(Icons.assignment_turned_in),
                   SizedBox(width: 5),
                   Text(
-                    "View Submissions",
+                    "Grade Submissions",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
@@ -147,7 +148,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                     });
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => LoginPortal(),
+                        builder: (context) => MainPage(),
                       ),
                     );
                   },
@@ -211,36 +212,8 @@ class _TeacherHomeState extends State<TeacherHome> {
                 ),
               )
             ),
-            SizedBox(height: 15),
-            // display identity
-            Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(Icons.perm_identity),
-                  SizedBox(width: 5),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Identity: ',
-                      style: TextStyle(fontSize: 20),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Teacher',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 33, 89, 243),
-                          )
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            // email verification status
             SizedBox(height: 30),
+            // email verification status
             _currentUser.emailVerified
               // if already verified
               ? Row(

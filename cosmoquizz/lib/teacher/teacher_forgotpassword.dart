@@ -29,6 +29,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Password Recovery", style: TextStyle(fontSize: 25)),
+          backgroundColor: Colors.green,
         ),
         body: SingleChildScrollView(
           child: Align(
@@ -111,7 +112,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
                                           // pop-up message
                                           showDialog(
                                             context: context,
-                                            builder: (BuildContext context) => emailSent(context),
+                                            builder: (BuildContext context) => emailConfirmation(context),
                                           );
                                         }
                                       },
@@ -144,7 +145,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
 }
 
 // pop-up message after clicked recover password button
-Widget emailSent(BuildContext context) {
+Widget emailConfirmation(BuildContext context) {
   return AlertDialog(
     title: Text('Email Sent!', style: TextStyle(fontSize: 20)),
     content: Column(

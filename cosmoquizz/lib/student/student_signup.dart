@@ -4,9 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
-import '/api/student_api.dart';
-import '/api/models/student_model.dart';
-import '/portal/signup_portal.dart';
+import '/api/service/student_service.dart';
+import '/api/model/student_model.dart';
+import '/main.dart';
 import './student_login.dart';
 import './student_home.dart';
 
@@ -69,7 +69,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUpPortal()),
+                    MaterialPageRoute(builder: (context) => MainPage()),
                   );
                 },
                 child: Row(
@@ -78,7 +78,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                     Icon(Icons.replay),
                     SizedBox(width: 5),
                     Text(
-                      "Back to Portal Page",
+                      "Back to Main Page",
                       style: TextStyle(fontSize: 20),
                     )
                   ],
@@ -411,7 +411,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                                             password: _passwordTextController.text,
                                           );
                                           setState(() {
-                                            _futureStudent = StudentAPI().createStudent(
+                                            _futureStudent = StudentService().createStudent(
                                               _birthdayTextController.text,
                                               _emergencyContactTextController.text,
                                               _firstNameTextController.text,

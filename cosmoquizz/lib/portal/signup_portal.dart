@@ -21,7 +21,7 @@ class _SignUpPortalState extends State<SignUpPortal> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background/space.jpg"),
+              image: AssetImage("assets/background/space_1.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -137,11 +137,12 @@ class _SignUpPortalState extends State<SignUpPortal> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () {/*
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => TeacherSignUp()),
                         );
+                        */
                       },
                       child: Text(
                         'Register as Teacher',

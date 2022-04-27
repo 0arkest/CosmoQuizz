@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-import './models/student_model.dart';
+import '/api/model/student_model.dart';
 
-class StudentAPI {
+class StudentService {
   // create new student
   Future<PostStudent> createStudent(String birthday, String emergencyContact, String firstName, int grade, String lastName, String school, String username, String email) async {
     final response = await http.post(Uri.parse('http://cosmoquizz-api.herokuapp.com/students'),
@@ -32,7 +32,7 @@ class StudentAPI {
     }
   }
 
-  // get student by username
+  // get student info by username
   Future<GetStudent> getStudent(String username) async {
     final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students/${username}'));
 
@@ -46,4 +46,31 @@ class StudentAPI {
     }
   }
 
+  // get all teachers of student by username
+  Future<GetTeachersOfStudent> getTeachersOfStudent(String username) async {
+    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students/${username}/teachers'));
+
+    // if success
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      GetTeachersOfStudent result = GetTeachersOfStudent.fromJson(jsonResponse);
+      return result;
+    } else {
+      throw Exception('Failed to retrieve teachers.');
+    }
+  }
+
+  // get all students
+  Future<GetAllStudents> getAllStudents() async {
+    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students'));
+
+    // if success
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      GetAllStudents result = GetAllStudents.fromJson(jsonResponse);
+      return result;
+    } else {
+      throw Exception('Failed to retrieve students.');
+    }
+  }
 }

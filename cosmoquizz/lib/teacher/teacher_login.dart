@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import '/authentication/auth.dart';
 import '/authentication/validator.dart';
-import '/portal/login_portal.dart';
+import '/main.dart';
 import './teacher_forgotpassword.dart';
 import './teacher_signup.dart';
 import './teacher_home.dart';
@@ -51,6 +51,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Sign In', style: TextStyle(fontSize: 25)),
+          backgroundColor: Colors.green,
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
             // back button
@@ -59,7 +60,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPortal()),
+                    MaterialPageRoute(builder: (context) => MainPage()),
                   );
                 },
                 child: Row(
@@ -68,14 +69,14 @@ class _TeacherLoginState extends State<TeacherLogin> {
                     Icon(Icons.replay),
                     SizedBox(width: 5),
                     Text(
-                      "Back to Portal Page",
+                      "Back to Main Page",
                       style: TextStyle(fontSize: 20),
                     )
                   ],
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color.fromARGB(255, 33, 100, 243),
+                  backgroundColor: Colors.lightGreen,
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),

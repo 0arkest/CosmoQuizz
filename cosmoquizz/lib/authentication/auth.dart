@@ -30,7 +30,7 @@ class Authentication {
       }
       /*
       else if (e.code == 'invalid-email') {
-        print('Invalid Email.');
+        print('Invalid email address.');
       }
       */
     }
@@ -66,10 +66,10 @@ class Authentication {
       }
       /*
       else if (e.code == 'invalid-email') {
-        print('Invalid Email.');
+        print('Invalid email address.');
       }
       else if (e.code == 'user-disabled') {
-        print('Your account is suspended.');
+        print('Your account has been suspended.');
       }
       */
     }
@@ -98,7 +98,7 @@ class Authentication {
       }
       /*
       else if (e.code == 'auth/invalid-email') {
-        print('Invalid Email.');
+        print('Invalid email address.');
       }
       */
     }

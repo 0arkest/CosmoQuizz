@@ -4,6 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import './firebase_options.dart';
 import './portal/login_portal.dart';
 import './portal/signup_portal.dart';
+import '/student/student_login.dart';
+import '/student/student_signup.dart';
+import '/teacher/teacher_login.dart';
+import '/teacher/teacher_signup.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +38,30 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  String? dropdownValue;
+
+  List<DropdownMenuItem<String>> _dropDownLogin() {
+    List<String> ddl = ["Student Login", "Teacher Login",];
+    return ddl.map(
+      (value) =>
+      DropdownMenuItem(
+        value: value,
+        child: Text(value, style: TextStyle(color: Colors.purple, fontSize: 20)),
+      )
+    ).toList();
+  }
+
+  List<DropdownMenuItem<String>> _dropDownSignUp() {
+    List<String> ddl = ["Student Sign Up", "Teacher Sign Up",];
+    return ddl.map(
+      (value) =>
+      DropdownMenuItem(
+        value: value,
+        child: Text(value, style: TextStyle(color: Colors.purple, fontSize: 20)),
+      )
+    ).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -72,7 +100,73 @@ class _MainPageState extends State<MainPage> {
             elevation: 0,
             automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
             actions: [
+              // sign in buttons
+              Container(
+                margin: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.lightBlue, borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton(
+                  value: dropdownValue,
+                  items: _dropDownLogin(),
+                  onChanged: (String? value){
+                    dropdownValue = value;
+                    switch(value){
+                      case "Student Login" :
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => StudentLogin()),
+                        );
+                        break;
+                      case "Teacher Login" :
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TeacherLogin()),
+                        );
+                        break;
+                    }
+                  },
+                  hint: Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 20)),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  underline: SizedBox(),
+                ),
+              ),
+              SizedBox(width: 50),
+              Container(
+                margin: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent, borderRadius: BorderRadius.circular(10)),
+                child: DropdownButton(
+                  value: dropdownValue,
+                  items: _dropDownSignUp(),
+                  onChanged: (String? value){
+                    dropdownValue = value;
+                    switch(value){
+                      case "Student Sign Up" :
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => StudentSignUp()),
+                        );
+                        break;
+                      case "Teacher Sign Up" :
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TeacherSignUp()),
+                        );
+                        break;
+                    }
+                  },
+                  hint: Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 20)),
+                  icon: const Icon(Icons.arrow_drop_down),
+                  underline: SizedBox(),
+                ),
+              ),
+              SizedBox(width: 100),
               // sign in button
+              /*
               Center(
                 child: OutlinedButton(
                   onPressed: () {
@@ -108,6 +202,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(width: 100),
+              */
             ]
           ),
           body: SingleChildScrollView(
