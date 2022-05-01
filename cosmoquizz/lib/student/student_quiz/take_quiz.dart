@@ -118,6 +118,10 @@ class _TakeQuizState extends State<TakeQuiz> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(height: 60),
+
+                        // you can call timer widget here, for example Countdown();
+
+                        SizedBox(height: 20),
                         for (var i = 0; i < totalQuestions; i++)
                           Column(
                             children: <Widget>[
@@ -365,3 +369,5 @@ Widget submitConfirmation(BuildContext context) {
     ],
   );
 }
+
+// you can add timer widget here
