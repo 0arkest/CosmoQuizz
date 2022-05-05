@@ -7,7 +7,7 @@ import '/api/model/test_model.dart';
 class TestService {
   // get all test names
   Future<GetAllTests> getAllTests() async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/tests'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/tests'));
 
     // if success
     if (response.statusCode == 200) {
@@ -21,7 +21,7 @@ class TestService {
 
   // get test info by test name
   Future<GetTest> getTest(String testName) async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/tests/${testName}'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/tests/${testName}'));
 
     // if success
     if (response.statusCode == 200) {

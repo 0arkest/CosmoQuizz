@@ -34,7 +34,7 @@ class _CreateTestState extends State<CreateTest> {
   }
 
   void uploadSelectedFile() async {
-    final request = http.MultipartRequest('POST', Uri.parse('http://cosmoquizz-api.herokuapp.com/tests/${_currentUser.displayName}'));
+    final request = http.MultipartRequest('POST', Uri.parse('https://cosmoquizz-api.herokuapp.com/tests/${_currentUser.displayName}'));
     request.files.add(http.MultipartFile("file", objFile!.readStream!, objFile!.size, filename: objFile!.name, contentType: MediaType("text", "csv")));
 
     var resp = await request.send();

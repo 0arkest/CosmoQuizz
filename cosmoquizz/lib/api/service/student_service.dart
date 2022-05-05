@@ -7,7 +7,7 @@ import '/api/model/student_model.dart';
 class StudentService {
   // create new student
   Future<PostStudent> createStudent(String birthday, String emergencyContact, String firstName, int grade, String lastName, String school, String username, String email) async {
-    final response = await http.post(Uri.parse('http://cosmoquizz-api.herokuapp.com/students'),
+    final response = await http.post(Uri.parse('https://cosmoquizz-api.herokuapp.com/students'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -34,7 +34,7 @@ class StudentService {
 
   // get student info by username
   Future<GetStudent> getStudent(String username) async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students/${username}'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/students/${username}'));
 
     // if success
     if (response.statusCode == 200) {
@@ -48,7 +48,7 @@ class StudentService {
 
   // get all teachers of student by username
   Future<GetTeachersOfStudent> getTeachersOfStudent(String username) async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students/${username}/teachers'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/students/${username}/teachers'));
 
     // if success
     if (response.statusCode == 200) {
@@ -62,7 +62,7 @@ class StudentService {
 
   // get all students
   Future<GetAllStudents> getAllStudents() async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/students'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/students'));
 
     // if success
     if (response.statusCode == 200) {

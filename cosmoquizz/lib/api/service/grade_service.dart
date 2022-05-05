@@ -7,7 +7,7 @@ import '/api/model/grade_model.dart';
 class GradeService {
   // create grade by username and test name
   Future<PostGrade> createGrade(String username, String testName, int grade) async {
-    final response = await http.post(Uri.parse('http://cosmoquizz-api.herokuapp.com/grades/${username}/${testName}'),
+    final response = await http.post(Uri.parse('https://cosmoquizz-api.herokuapp.com/grades/${username}/${testName}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -27,7 +27,7 @@ class GradeService {
 
   // get grade by username
   Future<GetGrade> getGrade(String username) async {
-    final response = await http.get(Uri.parse('http://cosmoquizz-api.herokuapp.com/grades/${username}'));
+    final response = await http.get(Uri.parse('https://cosmoquizz-api.herokuapp.com/grades/${username}'));
 
     // if success
     if (response.statusCode == 200) {
