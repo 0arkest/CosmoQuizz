@@ -37,7 +37,8 @@ dependencies:
   http: ^0.13.4
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.11
-  get: ^4.6.1
+  file_picker: ^4.5.1
+  flame: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -66,9 +67,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/logo/CosmoQuizz_transparent.png      # license: cc-by, more info in assets/logo/CosmoQuizz-logos.zip
-    - assets/logo/CosmoQuizz_black.png            # license: cc-by, more info in assets/logo/CosmoQuizz-logos.zip
-    - assets/logo/CosmoQuizz_white.png            # license: cc-by, more info in assets/logo/CosmoQuizz-logos.zip
+    - assets/logo/                                # license: cc-by, more info in assets/logo/CosmoQuizz-logos.zip
     - assets/background/astronomy.jpg             # https://pixabay.com/photos/astronomy-bright-constellation-dark-1867616/
     - assets/background/space_1.jpg               # https://pixabay.com/photos/space-deep-space-galaxy-nebula-2638126/
     - assets/background/space_2.png               # https://pixabay.com/vectors/space-astronomy-spaceships-5654794/

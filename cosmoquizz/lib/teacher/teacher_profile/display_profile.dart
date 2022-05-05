@@ -92,7 +92,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
                         child: Container(
                           width: 500,
                           height: 400,
-                          child: Image.asset('assets/logo/CosmoQuizz_transparent.png'),
+                          child: Image.asset('logo/CosmoQuizz_transparent.png'),
                         ),
                       ),
                     ),

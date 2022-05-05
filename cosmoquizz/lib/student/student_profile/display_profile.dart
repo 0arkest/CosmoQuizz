@@ -91,7 +91,7 @@ class _MyProfileState extends State<MyProfile> {
                         child: Container(
                           width: 500,
                           height: 400,
-                          child: Image.asset('assets/logo/CosmoQuizz_transparent.png'),
+                          child: Image.asset('logo/CosmoQuizz_transparent.png'),
                         ),
                       ),
                     ),

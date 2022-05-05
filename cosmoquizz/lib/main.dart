@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import './firebase_options.dart';
-import './portal/login_portal.dart';
-import './portal/signup_portal.dart';
 import '/student/student_login.dart';
 import '/student/student_signup.dart';
 import '/teacher/teacher_login.dart';
@@ -70,7 +68,7 @@ class _MainPageState extends State<MainPage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background/astronomy.jpg"),
+              image: AssetImage("background/astronomy.jpg"),
               fit: BoxFit.cover,
             ),
           ),
@@ -167,44 +165,6 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(width: 100),
-              // sign in button
-              /*
-              Center(
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPortal()),
-                    );
-                  },
-                  child: Text('Sign In', style: TextStyle(fontSize: 20)),
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 33, 100, 243),
-                    padding: const EdgeInsets.all(20),
-                  ),
-                ),
-              ),
-              SizedBox(width: 50),
-              // sign up button
-              Center(
-                child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpPortal()),
-                    );
-                  },
-                  child: Text('Sign Up', style: TextStyle(fontSize: 20)),
-                  style: OutlinedButton.styleFrom(
-                    primary: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 33, 54, 243),
-                    padding: const EdgeInsets.all(20),
-                  ),
-                ),
-              ),
-              SizedBox(width: 100),
-              */
             ]
           ),
           body: SingleChildScrollView(
@@ -219,7 +179,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       width: 500,
                       height: 400,
-                      child: Image.asset('assets/logo/CosmoQuizz_white.png'),
+                      child: Image.asset('logo/CosmoQuizz_white.png'),
                     ),
                   ),
                 ),
@@ -247,7 +207,12 @@ class _MainPageState extends State<MainPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 50.0),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
                     child: Text(
                       'test',
                       style: TextStyle(color: Colors.white, fontSize: 25),

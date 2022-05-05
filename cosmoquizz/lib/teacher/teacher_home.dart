@@ -5,6 +5,7 @@ import '/authentication/auth.dart';
 import '/main.dart';
 import './teacher_profile/display_profile.dart';
 import './teacher_submissions/display_tests.dart';
+import './teacher_test.dart';
 
 class TeacherHome extends StatefulWidget {
   TeacherHome({Key? key}) : super(key: key);
@@ -79,7 +80,12 @@ class _TeacherHomeState extends State<TeacherHome> {
           // assign quiz button
           Center(
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CreateTest()),
+                );
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -188,7 +194,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                 child: Container(
                   width: 500,
                   height: 400,
-                  child: Image.asset('assets/logo/CosmoQuizz_transparent.png'),
+                  child: Image.asset('logo/CosmoQuizz_transparent.png'),
                 ),
               ),
             ),
