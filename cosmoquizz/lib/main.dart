@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("background/astronomy.jpg"),
+              image: AssetImage('assets/background/astronomy.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -179,7 +179,7 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       width: 500,
                       height: 400,
-                      child: Image.asset('logo/CosmoQuizz_white.png'),
+                      child: Image.asset('assets/logo/CosmoQuizz_white.png'),
                     ),
                   ),
                 ),

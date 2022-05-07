@@ -104,7 +104,7 @@ class _StudentLoginState extends State<StudentLogin> {
                           child: Container(
                             width: 500,
                             height: 400,
-                            child: Image.asset('logo/CosmoQuizz_transparent.png'),
+                            child: Image.asset('assets/logo/CosmoQuizz_transparent.png'),
                           ),
                         ),
                       ),
