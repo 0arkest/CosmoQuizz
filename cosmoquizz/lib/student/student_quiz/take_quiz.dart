@@ -8,6 +8,8 @@ import '/api/service/submission_service.dart';
 import '/api/model/test_model.dart';
 import '/api/model/submission_model.dart';
 import '/student/student_quiz/display_quizzes.dart';
+import '/student/student_home.dart';
+import '/game/game_home.dart';
 
 class TakeQuiz extends StatefulWidget {
   final String quizName;
@@ -32,6 +34,11 @@ class _TakeQuizState extends State<TakeQuiz> {
   Future<PostSubmission>? _futureSubmission;
 
   bool _isProcessing = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -63,38 +70,13 @@ class _TakeQuizState extends State<TakeQuiz> {
           ),
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
-            // back button
-            Center(
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => DisplayQuizzes()),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Icon(Icons.replay),
-                    SizedBox(width: 5),
-                    Text(
-                      "Back",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-                style: OutlinedButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Color.fromARGB(255, 33, 89, 243),
-                  padding: const EdgeInsets.all(20),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-            ),
+            // quiz timer
+            QuizTimer(),
             SizedBox(width: 60),
-        ]
+            // game timer
+            GameTimer(),
+            SizedBox(width: 700),
+          ]
         ),
         body: SingleChildScrollView(
           child: Align(
@@ -118,10 +100,6 @@ class _TakeQuizState extends State<TakeQuiz> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(height: 60),
-
-                        // you can call timer widget here, for example Countdown();
-
-                        SizedBox(height: 20),
                         for (var i = 0; i < totalQuestions; i++)
                           Column(
                             children: <Widget>[
@@ -323,6 +301,167 @@ class _TakeQuizState extends State<TakeQuiz> {
   }
 }
 
+// class that return quiz countdown timer
+class QuizTimer extends StatefulWidget {
+  const QuizTimer({Key? key}) : super(key: key);
+
+  @override
+  State<QuizTimer> createState() => _QuizTimerState();
+}
+
+class _QuizTimerState extends State<QuizTimer> {
+  Timer? _timer;
+
+  // set maximum time for quiz
+  final _maxSeconds = 20;
+
+  int _currentSecond = 0;
+
+  // quiz timer display format
+  String get _quizTimerFormat {
+    const secondsPerMinute = 60;
+    final secondsLeft = _maxSeconds - _currentSecond;
+
+    final formattedMinutesLeft = (secondsLeft ~/ secondsPerMinute).toString().padLeft(2, '0');
+    final formattedSecondsLeft = (secondsLeft % secondsPerMinute).toString().padLeft(2, '0');
+
+    return '$formattedMinutesLeft : $formattedSecondsLeft';
+  }
+
+  void quizTimer() {
+    final duration = Duration(seconds: 1);
+    _timer = Timer.periodic(duration, (Timer timer) {
+      setState(() {
+        _currentSecond = timer.tick;
+        // if time passed
+        if (timer.tick >= _maxSeconds) {
+          timer.cancel();
+          // pop-up message
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => timeOut(context),
+          );
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer!.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    quizTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.timer),
+          SizedBox(width: 5),
+          Text(
+            'Time Left: ${_quizTimerFormat}',
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// class that return game countdown timer
+class GameTimer extends StatefulWidget {
+  const GameTimer({Key? key}) : super(key: key);
+
+  @override
+  State<GameTimer> createState() => _GameTimerState();
+}
+
+class _GameTimerState extends State<GameTimer> {
+  Timer? _timer2;
+
+  // set maximum time for game
+  final _maxSeconds2 = 5;
+
+  int _currentSecond2 = 0;
+
+  bool gameCountDownComplete = false;
+  bool gamePlayed = false;
+
+  // quiz timer display format
+  String get _gameTimerFormat {
+    const secondsPerMinute = 60;
+    final secondsLeft = _maxSeconds2 - _currentSecond2;
+
+    final formattedMinutesLeft = (secondsLeft ~/ secondsPerMinute).toString().padLeft(2, '0');
+    final formattedSecondsLeft = (secondsLeft % secondsPerMinute).toString().padLeft(2, '0');
+
+    if (gameCountDownComplete) {
+      return 'Play!';
+    } else {
+      return '$formattedMinutesLeft : $formattedSecondsLeft';
+    }
+  }
+
+  void gameTimer() {
+    final duration = Duration(seconds: 1);
+    _timer2 = Timer.periodic(duration, (Timer timer) {
+      setState(() {
+        _currentSecond2 = timer.tick;
+        if (timer.tick >= _maxSeconds2) {
+          timer.cancel();
+          gameCountDownComplete = true;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer2!.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    gameTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          if ((gameCountDownComplete) & (gamePlayed == false)) {
+            gamePlayed = true;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TRexGameWrapper()),
+            );
+          }
+        },
+        child: Text(
+          'Game: ${_gameTimerFormat}',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: Color.fromARGB(255, 33, 100, 243),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 // pop-up message after clicked submit button
 Widget submitConfirmation(BuildContext context) {
@@ -341,7 +480,12 @@ Widget submitConfirmation(BuildContext context) {
     actions: <Widget>[
       // game button
       TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TRexGameWrapper()),
+          );
+        },
         child: Text(
           'Play Game',
           style: TextStyle(
@@ -353,7 +497,7 @@ Widget submitConfirmation(BuildContext context) {
       // return button
       TextButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => DisplayQuizzes()),
           );
@@ -370,4 +514,37 @@ Widget submitConfirmation(BuildContext context) {
   );
 }
 
-// you can add timer widget here
+// time-out message after timer ends
+Widget timeOut(BuildContext context) {
+  return AlertDialog(
+    title: Text('Time Out!', style: TextStyle(fontSize: 20)),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Time has passed for you to submit to quiz.",
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      // return button
+      TextButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => StudentHome()),
+          );
+        },
+        child: Text(
+          'Return to Home Page',
+          style: TextStyle(
+            color: Color.fromARGB(255, 33, 100, 243),
+            fontSize: 16,
+          ),
+        ),
+      ),
+    ],
+  );
+}

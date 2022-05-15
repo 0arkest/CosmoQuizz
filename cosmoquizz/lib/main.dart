@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import './firebase_options.dart';
-import '/student/student_login.dart';
-import '/student/student_signup.dart';
-import '/teacher/teacher_login.dart';
-import '/teacher/teacher_signup.dart';
+import './student/student_login.dart';
+import './student/student_signup.dart';
+import './teacher/teacher_login.dart';
+import './teacher/teacher_signup.dart';
+import './game/game_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -210,7 +211,7 @@ class _MainPageState extends State<MainPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => TRexGameWrapper()),
                       );
                     },
                     child: Text(

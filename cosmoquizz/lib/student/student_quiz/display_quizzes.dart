@@ -156,7 +156,7 @@ class QuizConfirmation extends StatelessWidget {
         // yes button
         TextButton(
           onPressed: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => TakeQuiz(quizName: quizName)),
             );

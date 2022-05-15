@@ -72,6 +72,7 @@ flutter:
     - assets/background/space_1.jpg               # https://pixabay.com/photos/space-deep-space-galaxy-nebula-2638126/
     - assets/background/space_2.png               # https://pixabay.com/vectors/space-astronomy-spaceships-5654794/
     - assets/background/milky_way.jpg             # https://unsplash.com/photos/rCbdp8VCYhQ
+    - assets/images/                              # images for game
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
