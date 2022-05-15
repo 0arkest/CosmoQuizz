@@ -22,6 +22,8 @@ Database: Firebase (noSQL)
 
 Platform: Multi-platform (mobile, web, desktop, and embedded devices)
 
-API: Heroku
+API Hosting: Heroku
+
+FrontEnd Hosting: Github Pages
 
 Game Engine: Flame
