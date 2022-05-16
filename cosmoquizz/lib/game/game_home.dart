@@ -158,7 +158,7 @@ class _GameTimerState extends State<GameTimer> {
   Timer? _timer;
 
   // set maximum time for game
-  final _maxSeconds = 20;
+  final _maxSeconds = 30;
 
   int _currentSecond = 0;
 
