@@ -32,53 +32,10 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
   TRexGame? game;
   final _focusNode = FocusNode();
 
-  Timer? _timer;
-
-  // set time for game
-  final _maxSeconds = 10;
-
-  int _currentSecond = 0;
-
-  // game timer display format
-  String get _timerText {
-    const secondsPerMinute = 60;
-    final secondsLeft = _maxSeconds - _currentSecond;
-
-    final formattedMinutesLeft = (secondsLeft ~/ secondsPerMinute).toString().padLeft(2, '0');
-    final formattedSecondsLeft = (secondsLeft % secondsPerMinute).toString().padLeft(2, '0');
-
-    return '$formattedMinutesLeft : $formattedSecondsLeft';
-  }
-
-  // game timer
-  void startTimer() {
-    final duration = Duration(seconds: 1);
-    _timer = Timer.periodic(duration, (Timer timer) {
-      setState(() {
-        _currentSecond = timer.tick;
-        if (timer.tick >= _maxSeconds) {
-          timer.cancel();
-          // pop-up message
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => timeOut(context),
-          );
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer!.cancel();
-  }
-
   @override
   void initState() {
     super.initState();
     startGame();
-    startTimer();
   }
 
   void startGame() {
@@ -142,19 +99,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
           // game timer
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.timer),
-                SizedBox(width: 5),
-                Text(
-                  'Time Left: ${_timerText}',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
-          ),
+          GameTimer(),
           SizedBox(width: 600),
           // end game button
           Center(
@@ -196,6 +141,81 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
             game: game!,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// class that return game countdown timer
+class GameTimer extends StatefulWidget {
+  const GameTimer({Key? key}) : super(key: key);
+
+  @override
+  State<GameTimer> createState() => _GameTimerState();
+}
+
+class _GameTimerState extends State<GameTimer> {
+  Timer? _timer;
+
+  // set maximum time for game
+  final _maxSeconds = 20;
+
+  int _currentSecond = 0;
+
+  // game timer display format
+  String get _gameTimerFormat {
+    const secondsPerMinute = 60;
+    final secondsLeft = _maxSeconds - _currentSecond;
+
+    final formattedMinutesLeft = (secondsLeft ~/ secondsPerMinute).toString().padLeft(2, '0');
+    final formattedSecondsLeft = (secondsLeft % secondsPerMinute).toString().padLeft(2, '0');
+
+    return '$formattedMinutesLeft : $formattedSecondsLeft';
+  }
+
+  void gameTimer() {
+    final duration = Duration(seconds: 1);
+    _timer = Timer.periodic(duration, (Timer timer) {
+      setState(() {
+        _currentSecond = timer.tick;
+        // if time passed
+        if (timer.tick >= _maxSeconds) {
+          timer.cancel();
+          // pop-up message
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => timeOut(context),
+          );
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer!.cancel();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    gameTimer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.timer),
+          SizedBox(width: 5),
+          Text(
+            'Time Left: ${_gameTimerFormat}',
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
       ),
     );
   }

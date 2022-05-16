@@ -313,7 +313,7 @@ class _QuizTimerState extends State<QuizTimer> {
   Timer? _timer;
 
   // set maximum time for quiz
-  final _maxSeconds = 20;
+  final _maxSeconds = 30;
 
   int _currentSecond = 0;
 

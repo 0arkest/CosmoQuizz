@@ -6,7 +6,6 @@ import './student/student_login.dart';
 import './student/student_signup.dart';
 import './teacher/teacher_login.dart';
 import './teacher/teacher_signup.dart';
-import './game/game_home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -202,25 +201,6 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                /*
-                SizedBox(height: 30),
-                // use to test stuffs without login
-                Padding(
-                  padding: const EdgeInsets.only(right: 50.0),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TRexGameWrapper()),
-                      );
-                    },
-                    child: Text(
-                      'test',
-                      style: TextStyle(color: Colors.white, fontSize: 25),
-                    ),
-                  ),
-                ),
-                */
               ]
             ),
           ),
