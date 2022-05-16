@@ -117,7 +117,15 @@ class _DisplayGradesState extends State<DisplayGrades> {
                   ]
                 );
               } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+                //return Text('${snapshot.error}');
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 60),
+                    Text('No Grade Found.'),
+                  ]
+                );
               }
               return const CircularProgressIndicator();
             },

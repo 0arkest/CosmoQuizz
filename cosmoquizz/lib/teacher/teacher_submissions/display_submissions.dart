@@ -128,7 +128,15 @@ class _DisplaySubmissionsState extends State<DisplaySubmissions> {
                   ],
                 );
               } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+                //return Text('${snapshot.error}');
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 60),
+                    Text('No Submission Found.'),
+                  ]
+                );
               }
               return const CircularProgressIndicator();
             },

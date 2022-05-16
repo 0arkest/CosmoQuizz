@@ -124,7 +124,15 @@ class _DisplayTestsState extends State<DisplayTests> {
                   ],
                 );
               } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+                //return Text('${snapshot.error}');
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 60),
+                    Text('No Test Found.'),
+                  ]
+                );
               }
               return const CircularProgressIndicator();
             },

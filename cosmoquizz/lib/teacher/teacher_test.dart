@@ -4,6 +4,8 @@ import 'package:http_parser/http_parser.dart';
 import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 
+import '/teacher/teacher_home.dart';
+
 class CreateTest extends StatefulWidget {
   CreateTest({Key? key}) : super(key: key);
   final User user = FirebaseAuth.instance.currentUser!;
@@ -124,7 +126,14 @@ class _CreateTestState extends State<CreateTest> {
               SizedBox(height: 30),
               ElevatedButton(
                 child: Text("Create New Test!", style: TextStyle(color: Colors.white, fontSize: 20)),
-                onPressed: () => uploadSelectedFile(),
+                onPressed: () {
+                  uploadSelectedFile();
+                  // pop-up message
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => submitConfirmation(context),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   primary: _themeColor,
                   padding: const EdgeInsets.all(15),
@@ -139,4 +148,38 @@ class _CreateTestState extends State<CreateTest> {
       ),
     );
   }
+}
+
+// pop-up message after clicked submit button
+Widget submitConfirmation(BuildContext context) {
+  return AlertDialog(
+    title: Text('Success!', style: TextStyle(fontSize: 20)),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "Your have create a new quiz.",
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TeacherHome()),
+          );
+        },
+        child: Text(
+          'Return Home',
+          style: TextStyle(
+            color: Color.fromARGB(255, 33, 100, 243),
+            fontSize: 16,
+          ),
+        ),
+      ),
+    ],
+  );
 }
