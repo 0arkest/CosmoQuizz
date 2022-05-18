@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '/authentication/auth.dart';
 import '/main.dart';
 import './teacher_profile/display_profile.dart';
-import './teacher_submissions/display_tests.dart';
-import './teacher_test.dart';
+import './teacher_quiz/create_quiz.dart';
+import './teacher_submission/display_quizzes.dart';
 
 class TeacherHome extends StatefulWidget {
   TeacherHome({Key? key}) : super(key: key);
@@ -19,14 +19,27 @@ class _TeacherHomeState extends State<TeacherHome> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
 
-  Color _themeColor = Color.fromARGB(255, 60, 138, 62);
+  Color? _buttonColor;
   
   late User _currentUser;
+
+  void verification() {
+    if (_currentUser.emailVerified) {
+      setState(() {
+        _buttonColor = Colors.grey;
+      });
+    } else {
+      setState(() {
+        _buttonColor = Color.fromARGB(255, 60, 138, 62);
+      });
+    }
+  }
 
   @override
   void initState() {
     _currentUser = widget.user;
     super.initState();
+    verification();
   }
 
   @override
@@ -39,7 +52,7 @@ class _TeacherHomeState extends State<TeacherHome> {
             children: <Widget>[
               Icon(Icons.home),
               SizedBox(width: 15),
-              Text("Teacher Home", style: TextStyle(fontSize: 25)),
+              Text("Home", style: TextStyle(fontSize: 25)),
             ],
           ),
         ),
@@ -68,7 +81,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: _themeColor,
+                backgroundColor: Color.fromARGB(255, 60, 138, 62),
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -77,13 +90,13 @@ class _TeacherHomeState extends State<TeacherHome> {
             ),
           ),
           SizedBox(width: 40),
-          // assign quiz button
+          // create quiz button
           Center(
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CreateTest()),
+                  MaterialPageRoute(builder: (context) => CreateQuiz()),
                 );
               },
               child: Row(
@@ -99,7 +112,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: _themeColor,
+                backgroundColor: Color.fromARGB(255, 60, 138, 62),
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -108,13 +121,13 @@ class _TeacherHomeState extends State<TeacherHome> {
             ),
           ),
           SizedBox(width: 40),
-          // view submission button
+          // grade submission button
           Center(
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DisplayTests()),
+                  MaterialPageRoute(builder: (context) => DisplayQuizzes()),
                 );
               },
               child: Row(
@@ -123,14 +136,14 @@ class _TeacherHomeState extends State<TeacherHome> {
                   Icon(Icons.assignment_turned_in),
                   SizedBox(width: 5),
                   Text(
-                    "Grade Submissions",
+                    "Grade Submission",
                     style: TextStyle(fontSize: 20),
                   ),
                 ],
               ),
               style: OutlinedButton.styleFrom(
                 primary: Colors.white,
-                backgroundColor: _themeColor,
+                backgroundColor: Color.fromARGB(255, 60, 138, 62),
                 padding: const EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -203,7 +216,7 @@ class _TeacherHomeState extends State<TeacherHome> {
               padding: const EdgeInsets.only(right: 30.0),
               child: RichText(
                 text: TextSpan(
-                  text: 'Welcome, ',
+                  text: 'Welcome, teacher ',
                   style: TextStyle(fontSize: 20),
                   children: <TextSpan>[
                     TextSpan(
@@ -211,7 +224,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: _themeColor,
+                        color: Color.fromARGB(255, 60, 138, 62),
                       )
                     ),
                   ],
@@ -251,7 +264,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                     ),
                   ],
                 )
-              // if haven't verified
+              // if not verified
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -294,7 +307,6 @@ class _TeacherHomeState extends State<TeacherHome> {
                         onPressed: () async {
                           if (_currentUser.emailVerified) {
                             print("You have already verified the email.");
-                            _themeColor = Colors.grey;
                           }
                           else {
                             setState(() {
@@ -311,7 +323,7 @@ class _TeacherHomeState extends State<TeacherHome> {
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: _themeColor,
+                          primary: _buttonColor,
                           padding: const EdgeInsets.all(15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

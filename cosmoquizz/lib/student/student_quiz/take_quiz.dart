@@ -8,12 +8,10 @@ import '/api/service/submission_service.dart';
 import '/api/model/test_model.dart';
 import '/api/model/submission_model.dart';
 import '/student/student_quiz/display_quizzes.dart';
-import '/student/student_home.dart';
 import '/game/game_home.dart';
 
 class TakeQuiz extends StatefulWidget {
   final String quizName;
-
   TakeQuiz({required this.quizName});
 
   final User user = FirebaseAuth.instance.currentUser!;
@@ -29,6 +27,8 @@ class _TakeQuizState extends State<TakeQuiz> {
 
   late User _currentUser;
 
+  late String _testName;
+
   late Future<GetTest>? _futureTest;
 
   Future<PostSubmission>? _futureSubmission;
@@ -36,13 +36,9 @@ class _TakeQuizState extends State<TakeQuiz> {
   bool _isProcessing = false;
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     _currentUser = widget.user;
+    _testName = widget.quizName;
     super.initState();
     _futureTest = TestService().getTest(widget.quizName);
   }
@@ -62,7 +58,7 @@ class _TakeQuizState extends State<TakeQuiz> {
                 Icon(Icons.assignment),
                 SizedBox(width: 15),
                 Text(
-                  "Quiz",
+                  "${_testName}",
                   style: TextStyle(fontSize: 25),
                 ),
               ],
@@ -86,7 +82,6 @@ class _TakeQuizState extends State<TakeQuiz> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final studentName = _currentUser.displayName!;
-                  final testName = snapshot.data!.data!.testName!;
                   final totalQuestions = (snapshot.data!.data!.questions!).length;
                   List<dynamic> testQuestions = [];
                   for (var i = 0; i < totalQuestions; i++) {
@@ -105,46 +100,37 @@ class _TakeQuizState extends State<TakeQuiz> {
                             children: <Widget>[
                               if (snapshot.data!.data!.questions![i].type == 'multiple-choice') ...[
                                 // quiz question
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    child: Text(
-                                      'Question: ${testQuestions[i]}',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
+                                Container(
+                                  child: Text(
+                                    'Question: ${testQuestions[i]}',
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 SizedBox(height: 15),
                                 // question choice
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    child: Text(
-                                      'Choice: ${snapshot.data!.data!.questions![i].options}',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
+                                Container(
+                                  child: Text(
+                                    'Choice: ${snapshot.data!.data!.questions![i].options}',
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 SizedBox(height: 15),
-                                // quiz question input field
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    width: 600,
-                                    child: TextFormField(
-                                      controller: _answerTextController[i],
-                                      validator: (value) => Validator.validateTextInput(textInput: value),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                        labelText: 'Answer',
-                                        hintText: "Please Enter Your Answer",
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(30.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(30.0),
-                                          borderSide: BorderSide(color: Colors.red),
-                                        ),
+                                // quiz answer input field
+                                Container(
+                                  width: 600,
+                                  child: TextFormField(
+                                    controller: _answerTextController[i],
+                                    validator: (value) => Validator.validateTextInput(textInput: value),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                      labelText: 'Answer',
+                                      hintText: "Please Enter Your Answer",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                        borderSide: BorderSide(color: Colors.red),
                                       ),
                                     ),
                                   ),
@@ -153,36 +139,30 @@ class _TakeQuizState extends State<TakeQuiz> {
                               ]
                               else if (snapshot.data!.data!.questions![i].type == 'essay') ...[
                                 // quiz question
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    child: Text(
-                                      '${testQuestions[i]}',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
+                                Container(
+                                  child: Text(
+                                    '${testQuestions[i]}',
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 SizedBox(height: 30),
-                                // quiz question input field
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    width: 900,
-                                    child: TextFormField(
-                                      controller: _answerTextController[i],
-                                      validator: (value) => Validator.validateTextInput(textInput: value),
-                                      maxLines: 5,
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                        labelText: 'Answer',
-                                        hintText: "Please Enter Your Answer",
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                          borderSide: BorderSide(color: Colors.red),
-                                        ),
+                                // quiz answer input field
+                                Container(
+                                  width: 900,
+                                  child: TextFormField(
+                                    controller: _answerTextController[i],
+                                    validator: (value) => Validator.validateTextInput(textInput: value),
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                      labelText: 'Answer',
+                                      hintText: "Please Enter Your Answer",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        borderSide: BorderSide(color: Colors.red),
                                       ),
                                     ),
                                   ),
@@ -191,35 +171,29 @@ class _TakeQuizState extends State<TakeQuiz> {
                               ]
                               else ...[
                                 // quiz question
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    child: Text(
-                                      '${testQuestions[i]}',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
+                                Container(
+                                  child: Text(
+                                    '${testQuestions[i]}',
+                                    style: TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 SizedBox(height: 30),
-                                // quiz question input field
-                                Padding(
-                                  padding: const EdgeInsets.only(),
-                                  child: Container(
-                                    width: 600,
-                                    child: TextFormField(
-                                      controller: _answerTextController[i],
-                                      validator: (value) => Validator.validateTextInput(textInput: value),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                        labelText: 'Answer',
-                                        hintText: "Please Enter Your Answer",
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(30.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(30.0),
-                                          borderSide: BorderSide(color: Colors.red),
-                                        ),
+                                // quiz answer input field
+                                Container(
+                                  width: 600,
+                                  child: TextFormField(
+                                    controller: _answerTextController[i],
+                                    validator: (value) => Validator.validateTextInput(textInput: value),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                      labelText: 'Answer',
+                                      hintText: "Please Enter Your Answer",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                        borderSide: BorderSide(color: Colors.red),
                                       ),
                                     ),
                                   ),
@@ -234,7 +208,7 @@ class _TakeQuizState extends State<TakeQuiz> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                // submit button
+                                // quiz submit button
                                 Padding(
                                   padding: const EdgeInsets.only(top: 90.0),
                                   child: Container(
@@ -256,7 +230,7 @@ class _TakeQuizState extends State<TakeQuiz> {
                                             _futureSubmission = SubmissionService().createSubmission(
                                               studentName,
                                               submission,
-                                              testName,
+                                              _testName,
                                             );
                                           });
                                           setState(() {
@@ -269,10 +243,7 @@ class _TakeQuizState extends State<TakeQuiz> {
                                           );
                                         }
                                       },
-                                      child: Text(
-                                        'Submit',
-                                        style: TextStyle(color: Colors.white, fontSize: 20),
-                                      ),
+                                      child: Text('Submit', style: TextStyle(color: Colors.white, fontSize: 20)),
                                       style: ElevatedButton.styleFrom(
                                         primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
@@ -289,7 +260,18 @@ class _TakeQuizState extends State<TakeQuiz> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
+                  //return Text('${snapshot.error}');
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 60),
+                      Text(
+                        'This Quiz Is No Longer Available',
+                        style: TextStyle(fontSize: 25, color: Colors.red),
+                      ),
+                    ]
+                  );
                 }
                 return const CircularProgressIndicator();
               },
@@ -317,7 +299,7 @@ class _QuizTimerState extends State<QuizTimer> {
 
   int _currentSecond = 0;
 
-  // quiz timer display format
+  // timer display format
   String get _quizTimerFormat {
     const secondsPerMinute = 60;
     final secondsLeft = _maxSeconds - _currentSecond;
@@ -333,7 +315,7 @@ class _QuizTimerState extends State<QuizTimer> {
     _timer = Timer.periodic(duration, (Timer timer) {
       setState(() {
         _currentSecond = timer.tick;
-        // if time passed
+        // if time has passed
         if (timer.tick >= _maxSeconds) {
           timer.cancel();
           // pop-up message
@@ -376,7 +358,7 @@ class _QuizTimerState extends State<QuizTimer> {
   }
 }
 
-// class that return game countdown timer
+// class that return game countdown timer button
 class GameTimer extends StatefulWidget {
   const GameTimer({Key? key}) : super(key: key);
 
@@ -395,7 +377,7 @@ class _GameTimerState extends State<GameTimer> {
   bool gameCountDownComplete = false;
   bool gamePlayed = false;
 
-  // quiz timer display format
+  // game timer display format
   String get _gameTimerFormat {
     const secondsPerMinute = 60;
     final secondsLeft = _maxSeconds2 - _currentSecond2;
@@ -453,7 +435,7 @@ class _GameTimerState extends State<GameTimer> {
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 33, 100, 243),
+          primary: Color.fromARGB(255, 33, 89, 243),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -466,7 +448,7 @@ class _GameTimerState extends State<GameTimer> {
 // pop-up message after clicked submit button
 Widget submitConfirmation(BuildContext context) {
   return AlertDialog(
-    title: Text('Submitted Successfully!', style: TextStyle(fontSize: 20)),
+    title: Text('Submitted!', style: TextStyle(fontSize: 20)),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -478,22 +460,6 @@ Widget submitConfirmation(BuildContext context) {
       ],
     ),
     actions: <Widget>[
-      // game button
-      TextButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => TRexGameWrapper()),
-          );
-        },
-        child: Text(
-          'Play Game',
-          style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
-            fontSize: 16,
-          ),
-        ),
-      ),
       // return button
       TextButton(
         onPressed: () {
@@ -505,7 +471,7 @@ Widget submitConfirmation(BuildContext context) {
         child: Text(
           'Return to Quiz Page',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
+            color: Color.fromARGB(255, 33, 89, 243),
             fontSize: 16,
           ),
         ),
@@ -514,16 +480,22 @@ Widget submitConfirmation(BuildContext context) {
   );
 }
 
-// time-out message after timer ends
+// time-out message after time passed
 Widget timeOut(BuildContext context) {
   return AlertDialog(
-    title: Text('Time Out!', style: TextStyle(fontSize: 20)),
+    title: Text(
+      'Time Out!',
+      style: TextStyle(
+        fontSize: 20,
+        color: Colors.red,
+      ),
+    ),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Time has passed for you to submit to quiz.",
+          "Time has passed for you to submit the quiz.",
           style: TextStyle(fontSize: 18),
         ),
       ],
@@ -534,13 +506,13 @@ Widget timeOut(BuildContext context) {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => StudentHome()),
+            MaterialPageRoute(builder: (context) => DisplayQuizzes()),
           );
         },
         child: Text(
-          'Return to Home Page',
+          'Return to Quiz Page',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
+            color: Color.fromARGB(255, 33, 89, 243),
             fontSize: 16,
           ),
         ),

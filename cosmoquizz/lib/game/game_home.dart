@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 
 import './game.dart';
 
+// GitHub MIT license, source code: https://github.com/bluefireteam/trex-flame
+
 /*
 void main() {
   //Flame.device.fullScreen();
@@ -63,12 +65,15 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: 60),
           Center(
-            child: Text('Failed to load.',
+            child: Text(
+              'Failed to load.',
               style: TextStyle(color: Colors.red, fontSize: 25),
             ),
           ),
           SizedBox(height: 30),
+          // back button
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -100,7 +105,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
         actions: [
           // game timer
           GameTimer(),
-          SizedBox(width: 600),
+          SizedBox(width: 650),
           // end game button
           Center(
             child: OutlinedButton(
@@ -128,7 +133,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
               ),
             ),
           ),
-          SizedBox(width: 90),
+          SizedBox(width: 60),
         ]
       ),
       body: Container(
@@ -162,8 +167,8 @@ class _GameTimerState extends State<GameTimer> {
 
   int _currentSecond = 0;
 
-  // game timer display format
-  String get _gameTimerFormat {
+  // timer display format
+  String get _timerFormat {
     const secondsPerMinute = 60;
     final secondsLeft = _maxSeconds - _currentSecond;
 
@@ -178,7 +183,7 @@ class _GameTimerState extends State<GameTimer> {
     _timer = Timer.periodic(duration, (Timer timer) {
       setState(() {
         _currentSecond = timer.tick;
-        // if time passed
+        // if time has passed
         if (timer.tick >= _maxSeconds) {
           timer.cancel();
           // pop-up message
@@ -212,7 +217,7 @@ class _GameTimerState extends State<GameTimer> {
           Icon(Icons.timer),
           SizedBox(width: 5),
           Text(
-            'Time Left: ${_gameTimerFormat}',
+            'Time Left: ${_timerFormat}',
             style: TextStyle(fontSize: 20),
           ),
         ],
@@ -221,7 +226,7 @@ class _GameTimerState extends State<GameTimer> {
   }
 }
 
-// time-out message after timer ends
+// time-out message
 Widget timeOut(BuildContext context) {
   return AlertDialog(
     title: Text('Time Out!', style: TextStyle(fontSize: 20)),
@@ -230,22 +235,22 @@ Widget timeOut(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Time to back to work!",
+          "Time to go back to work!",
           style: TextStyle(fontSize: 18),
         ),
       ],
     ),
     actions: <Widget>[
-      // return button
+      // back button
       TextButton(
         onPressed: () {
           int count = 0;
           Navigator.of(context).popUntil((_) => count++ >= 2);
         },
         child: Text(
-          'Back',
+          'Back to Quiz',
           style: TextStyle(
-            color: Color.fromARGB(255, 33, 100, 243),
+            color: Color.fromARGB(255, 33, 89, 243),
             fontSize: 16,
           ),
         ),

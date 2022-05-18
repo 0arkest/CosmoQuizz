@@ -55,10 +55,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
                 children: <Widget>[
                   Icon(Icons.replay),
                   SizedBox(width: 5),
-                  Text(
-                    "Back to Home Page",
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  Text("Back", style: TextStyle(fontSize: 20)),
                 ],
               ),
               style: OutlinedButton.styleFrom(
@@ -224,7 +221,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
                       ),
                     ),
                     SizedBox(height: 15),
-                    // display biography
+                    // display bio
                     Padding(
                       padding: const EdgeInsets.only(right: 40.0),
                       child: Row(
@@ -233,7 +230,7 @@ class _DisplayProfileState extends State<DisplayProfile> {
                           Icon(Icons.subject),
                           SizedBox(width: 5),
                           Text(
-                            'Biography: ${snapshot.data!.data!.bio!}',
+                            'Bio: ${snapshot.data!.data!.bio!}',
                             style: TextStyle(fontSize: 20),
                           )
                         ],
@@ -243,7 +240,18 @@ class _DisplayProfileState extends State<DisplayProfile> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              //return Text('${snapshot.error}');
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 60),
+                  Text(
+                    'Teacher Info Doesn\'t Exist.',
+                    style: TextStyle(fontSize: 25, color: Colors.red),
+                  ),
+                ]
+              );
             }
             return const CircularProgressIndicator();
           },

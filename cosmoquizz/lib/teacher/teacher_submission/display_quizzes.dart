@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '/api/service/test_service.dart';
 import '/api/model/test_model.dart';
-import './take_quiz.dart';
-import '/student/student_home.dart';
+import './quiz_submissions.dart';
+import '/teacher/teacher_home.dart';
 
 class DisplayQuizzes extends StatefulWidget {
   const DisplayQuizzes({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => StudentHome()),
+                      MaterialPageRoute(builder: (context) => TeacherHome()),
                     );
                   },
                   child: Row(
@@ -73,7 +73,7 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                   ),
                   style: OutlinedButton.styleFrom(
                     primary: Colors.white,
-                    backgroundColor: Color.fromARGB(255, 33, 89, 243),
+                    backgroundColor: Color.fromARGB(255, 60, 138, 62),
                     padding: const EdgeInsets.all(20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -99,7 +99,7 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                       children: <Widget>[
                         SizedBox(height: 60),
                         Text(
-                          'Choose the Quiz You Want to Take:',
+                          'Choose the Quiz You Want to Check Submissions:',
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                         SizedBox(height: 30),
@@ -111,10 +111,9 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                                 width: 250,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    // pop-up message
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) => QuizConfirmation(quizName: quizzes[i]),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => QuizSubmissions(quizName: quizzes[i])),
                                     );
                                   },
                                   child: Text(
@@ -122,7 +121,7 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                                     style: TextStyle(color: Colors.white, fontSize: 20),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.blue,
+                                    primary: Colors.green,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30),
                                     ),
@@ -156,63 +155,6 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
           ),
         ),
       ]
-    );
-  }
-}
-
-// pop-up message after clicked quiz button
-class QuizConfirmation extends StatelessWidget {
-  final String quizName;
-  QuizConfirmation({required this.quizName});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        'Take this Quiz?',
-        style: TextStyle(fontSize: 20),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "Confirm to take this quiz?",
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
-      ),
-      actions: <Widget>[
-        // continue button
-        TextButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => TakeQuiz(quizName: quizName)),
-            );
-          },
-          child: Text(
-            'Take It!',
-            style: TextStyle(
-              color: Colors.green,
-              fontSize: 16,
-            ),
-          ),
-        ),
-        // close button
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            'Maybe Later',
-            style: TextStyle(
-              color: Colors.red,
-              fontSize: 16,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

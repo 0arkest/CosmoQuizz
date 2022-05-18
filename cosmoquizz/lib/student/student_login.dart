@@ -50,7 +50,7 @@ class _StudentLoginState extends State<StudentLogin> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Sign In', style: TextStyle(fontSize: 25)),
+          title: Text('Sign In as Student', style: TextStyle(fontSize: 25)),
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
             // back button
@@ -75,7 +75,7 @@ class _StudentLoginState extends State<StudentLogin> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color.fromARGB(255, 33, 100, 243),
+                  backgroundColor: Color.fromARGB(255, 33, 89, 243),
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -224,7 +224,7 @@ class _StudentLoginState extends State<StudentLogin> {
                                             }
                                           },
                                           child: Text(
-                                            'Log In',
+                                            'Login',
                                             style: TextStyle(color: Colors.white, fontSize: 25),
                                           ),
                                           style: ElevatedButton.styleFrom(

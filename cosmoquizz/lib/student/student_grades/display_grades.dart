@@ -17,6 +17,18 @@ class _DisplayGradesState extends State<DisplayGrades> {
 
   late Future<GetGrade> _futureGrades;
 
+  Color gradeColor(int? grade) {
+    Color? _gradeColor;
+    if (grade! < 65) {
+      _gradeColor = Colors.red;
+    } else if ((grade >= 65) & (grade <= 85)) {
+      _gradeColor = Colors.orange;
+    } else {
+      _gradeColor = Colors.green;
+    }
+    return _gradeColor;
+  }
+
   @override
   void initState() {
     _currentUser = widget.user;
@@ -35,7 +47,7 @@ class _DisplayGradesState extends State<DisplayGrades> {
               Icon(Icons.assignment_turned_in),
               SizedBox(width: 15),
               Text(
-                "View Grades",
+                "My Grades",
                 style: TextStyle(fontSize: 25),
               ),
             ],
@@ -54,10 +66,7 @@ class _DisplayGradesState extends State<DisplayGrades> {
                 children: <Widget>[
                   Icon(Icons.replay),
                   SizedBox(width: 5),
-                  Text(
-                    "Back to Home Page",
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  Text("Back", style: TextStyle(fontSize: 20)),
                 ],
               ),
               style: OutlinedButton.styleFrom(
@@ -104,6 +113,7 @@ class _DisplayGradesState extends State<DisplayGrades> {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
+                                        color: gradeColor(snapshot.data!.grades![i].grade),
                                       )
                                     ),
                                   ],
@@ -111,7 +121,7 @@ class _DisplayGradesState extends State<DisplayGrades> {
                               )
                             ]
                           ),
-                          SizedBox(height: 60),
+                          SizedBox(height: 20),
                         ],
                       ),
                   ]
@@ -123,7 +133,11 @@ class _DisplayGradesState extends State<DisplayGrades> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 60),
-                    Text('No Grade Found.'),
+                    Text(
+                      'No Grade Found.\n'
+                      'Please Check Back Later.',
+                      style: TextStyle(fontSize: 25, color: Colors.red),
+                    ),
                   ]
                 );
               }

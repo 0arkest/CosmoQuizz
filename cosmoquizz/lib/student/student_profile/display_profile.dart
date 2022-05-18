@@ -4,15 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '/api/service/student_service.dart';
 import '/api/model/student_model.dart';
 
-class MyProfile extends StatefulWidget {
-  MyProfile({Key? key}) : super(key: key);
+class DisplayProfile extends StatefulWidget {
+  DisplayProfile({Key? key}) : super(key: key);
   final User user = FirebaseAuth.instance.currentUser!;
 
   @override
-  _MyProfileState createState() => _MyProfileState();
+  _DisplayProfileState createState() => _DisplayProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _DisplayProfileState extends State<DisplayProfile> {
   late User _currentUser;
 
   late Future<GetStudent> _futureStudent;
@@ -54,10 +54,7 @@ class _MyProfileState extends State<MyProfile> {
                 children: <Widget>[
                   Icon(Icons.replay),
                   SizedBox(width: 5),
-                  Text(
-                    "Back to Home Page",
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  Text("Back", style: TextStyle(fontSize: 20)),
                 ],
               ),
               style: OutlinedButton.styleFrom(
@@ -226,7 +223,18 @@ class _MyProfileState extends State<MyProfile> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              //return Text('${snapshot.error}');
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 60),
+                  Text(
+                    'Student Info Doesn\'t Exist.',
+                    style: TextStyle(fontSize: 25, color: Colors.red),
+                  ),
+                ]
+              );
             }
             return const CircularProgressIndicator();
           },

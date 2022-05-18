@@ -60,7 +60,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Sign Up', style: TextStyle(fontSize: 25)),
+          title: Text('Sign Up as Student', style: TextStyle(fontSize: 25)),
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
             // back button
@@ -85,7 +85,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: Color.fromARGB(255, 33, 54, 243),
+                  backgroundColor: Color.fromARGB(255, 33, 89, 243),
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -93,7 +93,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                 ),
               ),
             ),
-          SizedBox(width: 60),
+            SizedBox(width: 60),
           ]
         ),
         body: SingleChildScrollView(
@@ -274,7 +274,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 labelText: 'School',
-                                hintText: "Please Enter the Name of Your School",
+                                hintText: "Please Enter Your School Name",
                                 icon: Icon(
                                   Icons.school,
                                 ),

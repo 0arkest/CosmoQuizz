@@ -36,11 +36,11 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  String? dropdownValue;
+  String? _dropDownValue;
 
-  List<DropdownMenuItem<String>> _dropDownLogin() {
-    List<String> ddl = ["Student Login", "Teacher Login",];
-    return ddl.map(
+  List<DropdownMenuItem<String>> dropDownLogin() {
+    List<String> _list = ["Student Login", "Teacher Login"];
+    return _list.map(
       (value) =>
       DropdownMenuItem(
         value: value,
@@ -49,9 +49,9 @@ class _MainPageState extends State<MainPage> {
     ).toList();
   }
 
-  List<DropdownMenuItem<String>> _dropDownSignUp() {
-    List<String> ddl = ["Student Sign Up", "Teacher Sign Up",];
-    return ddl.map(
+  List<DropdownMenuItem<String>> dropDownSignUp() {
+    List<String> _list = ["Student Register", "Teacher Register"];
+    return _list.map(
       (value) =>
       DropdownMenuItem(
         value: value,
@@ -98,18 +98,19 @@ class _MainPageState extends State<MainPage> {
             elevation: 0,
             automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
             actions: [
-              // sign in buttons
+              // sign in button
               Container(
                 margin: const EdgeInsets.all(3.0),
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue, borderRadius: BorderRadius.circular(10)),
+                  color: Colors.lightBlue,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: DropdownButton(
-                  value: dropdownValue,
-                  items: _dropDownLogin(),
+                  value: _dropDownValue,
+                  items: dropDownLogin(),
                   onChanged: (String? value){
-                    dropdownValue = value;
+                    _dropDownValue = value;
                     switch(value){
                       case "Student Login" :
                         Navigator.push(
@@ -132,25 +133,27 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(width: 50),
+              // sign up button
               Container(
                 margin: const EdgeInsets.all(3.0),
                 padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                //padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent, borderRadius: BorderRadius.circular(10)),
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: DropdownButton(
-                  value: dropdownValue,
-                  items: _dropDownSignUp(),
+                  value: _dropDownValue,
+                  items: dropDownSignUp(),
                   onChanged: (String? value){
-                    dropdownValue = value;
+                    _dropDownValue = value;
                     switch(value){
-                      case "Student Sign Up" :
+                      case "Student Register" :
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => StudentSignUp()),
                         );
                         break;
-                      case "Teacher Sign Up" :
+                      case "Teacher Register" :
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => TeacherSignUp()),

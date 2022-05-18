@@ -1,3 +1,5 @@
+// use to validate input
+
 class Validator {
   static String? validateTextInput({required String? textInput}) {
     if (textInput == null) {

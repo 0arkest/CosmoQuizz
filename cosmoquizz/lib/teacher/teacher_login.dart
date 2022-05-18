@@ -25,8 +25,6 @@ class _TeacherLoginState extends State<TeacherLogin> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
-  final _themeColor = Color.fromARGB(255, 60, 138, 62);
-
   bool _isProcessing = false;
 
   // go to teacher home page if already signed in
@@ -52,7 +50,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Sign In', style: TextStyle(fontSize: 25)),
+          title: Text('Sign In as Teacher', style: TextStyle(fontSize: 25)),
           backgroundColor: Colors.green,
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
@@ -78,7 +76,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: _themeColor,
+                  backgroundColor: Color.fromARGB(255, 60, 138, 62),
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -185,7 +183,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
                                 },
                                 child: Text(
                                   'Forgot Password?',
-                                  style: TextStyle(color: _themeColor, fontSize: 18),
+                                  style: TextStyle(color: Color.fromARGB(255, 60, 138, 62), fontSize: 18),
                                 ),
                               ),
                             ),
@@ -227,11 +225,11 @@ class _TeacherLoginState extends State<TeacherLogin> {
                                             }
                                           },
                                           child: Text(
-                                            'Log In',
+                                            'Login',
                                             style: TextStyle(color: Colors.white, fontSize: 25),
                                           ),
                                           style: ElevatedButton.styleFrom(
-                                            primary: _themeColor,
+                                            primary: Color.fromARGB(255, 60, 138, 62),
                                             shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(30),
                                             ),
@@ -251,7 +249,7 @@ class _TeacherLoginState extends State<TeacherLogin> {
                                         },
                                         child: Text(
                                           'New User? Create Account!',
-                                          style: TextStyle(color: _themeColor, fontSize: 18),
+                                          style: TextStyle(color: Color.fromARGB(255, 60, 138, 62), fontSize: 18),
                                         ),
                                       ),
                                     ),

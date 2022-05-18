@@ -19,14 +19,27 @@ class _StudentHomeState extends State<StudentHome> {
   bool _isSendingVerification = false;
   bool _isSigningOut = false;
 
-  Color _buttonColor = Color.fromARGB(255, 33, 89, 243);
+  Color? _buttonColor;
   
   late User _currentUser;
+
+  void verification() {
+    if (_currentUser.emailVerified) {
+      setState(() {
+        _buttonColor = Colors.grey;
+      });
+    } else {
+      setState(() {
+        _buttonColor = Color.fromARGB(255, 33, 89, 243);
+      });
+    }
+  }
 
   @override
   void initState() {
     _currentUser = widget.user;
     super.initState();
+    verification();
   }
 
   @override
@@ -39,46 +52,20 @@ class _StudentHomeState extends State<StudentHome> {
             children: <Widget>[
               Icon(Icons.home),
               SizedBox(width: 15),
-              Text("Student Home", style: TextStyle(fontSize: 25)),
+              Text("Home", style: TextStyle(fontSize: 25)),
             ],
           ),
         ),
         automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
         actions: [
-          /*
-          // game button to test game. Remove after game completely built
-          Center(
-            child: OutlinedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Icon(Icons.videogame_asset),
-                  SizedBox(width: 5),
-                  Text("Game(beta)", style: TextStyle(fontSize: 20)),
-                ],
-              ),
-              style: OutlinedButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Color.fromARGB(255, 33, 89, 243),
-                padding: const EdgeInsets.all(20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: 120),
-          */
           // profile button
           Center(
             child: OutlinedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyProfile()),
+                  MaterialPageRoute(builder: (context) => DisplayProfile()),
                 );
-                
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -223,12 +210,12 @@ class _StudentHomeState extends State<StudentHome> {
                 ),
               ),
             ),
-            // display welcome message
+            // welcome
             Padding(
               padding: const EdgeInsets.only(right: 30.0),
               child: RichText(
                 text: TextSpan(
-                  text: 'Welcome, ',
+                  text: 'Welcome, student ',
                   style: TextStyle(fontSize: 20),
                   children: <TextSpan>[
                     TextSpan(
@@ -276,7 +263,7 @@ class _StudentHomeState extends State<StudentHome> {
                     ),
                   ],
                 )
-              // if haven't verified
+              // if not verified
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -319,9 +306,6 @@ class _StudentHomeState extends State<StudentHome> {
                         onPressed: () async {
                           if (_currentUser.emailVerified) {
                             print("You have already verified the email.");
-                            setState(() {
-                              _buttonColor = Colors.grey;
-                            });
                           }
                           else {
                             setState(() {

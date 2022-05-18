@@ -20,8 +20,6 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
 
   bool _isProcessing = false;
 
-  final _themeColor = Color.fromARGB(255, 60, 138, 62);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,7 +29,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Password Recovery", style: TextStyle(fontSize: 25)),
-          backgroundColor: _themeColor,
+          backgroundColor: Colors.green,
         ),
         body: SingleChildScrollView(
           child: Align(
@@ -119,7 +117,7 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
                                         }
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        primary: _themeColor,
+                                        primary: Color.fromARGB(255, 60, 138, 62),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -148,7 +146,6 @@ class _TeacherForgotPWState extends State<TeacherForgotPW> {
 
 // pop-up message after clicked recover password button
 Widget emailConfirmation(BuildContext context) {
-  final _themeColor = Color.fromARGB(255, 60, 138, 62);
   return AlertDialog(
     title: Text('Email Sent!', style: TextStyle(fontSize: 20)),
     content: Column(
@@ -162,7 +159,7 @@ Widget emailConfirmation(BuildContext context) {
       ],
     ),
     actions: <Widget>[
-      // return button
+      // back button
       TextButton(
         onPressed: () {
           Navigator.push(
@@ -171,14 +168,15 @@ Widget emailConfirmation(BuildContext context) {
           );
         },
         child: Text(
-          'Return to Login Page',
+          'Back to Login Page',
           style: TextStyle(
-            color: _themeColor,
+            color: Color.fromARGB(255, 60, 138, 62),
             fontSize: 16,
           ),
         ),
       ),
       SizedBox(width: 20),
+      // close button
       TextButton(
         onPressed: () {
           Navigator.of(context).pop();
@@ -186,7 +184,7 @@ Widget emailConfirmation(BuildContext context) {
         child: Text(
           'Close',
           style: TextStyle(
-            color: _themeColor,
+            color: Color.fromARGB(255, 60, 138, 62),
             fontSize: 16,
           ),
         ),

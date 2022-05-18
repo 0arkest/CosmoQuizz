@@ -43,8 +43,6 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
 
   bool _isProcessing = false;
 
-  final _themeColor = Color.fromARGB(255, 60, 138, 62);
-
   Future<PostTeacher>? _futureTeacher;
 
   @override
@@ -64,7 +62,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Sign Up', style: TextStyle(fontSize: 25)),
+          title: Text('Sign Up as Teacher', style: TextStyle(fontSize: 25)),
           backgroundColor: Colors.green,
           automaticallyImplyLeading: false,   // no default back arrow for going back to the previous page
           actions: [
@@ -90,7 +88,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                 ),
                 style: OutlinedButton.styleFrom(
                   primary: Colors.white,
-                  backgroundColor: _themeColor,
+                  backgroundColor: Color.fromARGB(255, 60, 138, 62),
                   padding: const EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -279,7 +277,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 labelText: 'School',
-                                hintText: "Please Enter the Name of Your School",
+                                hintText: "Please Enter Your School Name",
                                 icon: Icon(
                                   Icons.school,
                                 ),
@@ -471,7 +469,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                                         style: TextStyle(color: Colors.white, fontSize: 25),
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                        primary: _themeColor,
+                                        primary: Color.fromARGB(255, 60, 138, 62),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(30),
                                         ),
@@ -491,7 +489,7 @@ class _TeacherSignUpState extends State<TeacherSignUp> {
                                     },
                                     child: Text(
                                       'Already Have an Account? Sign In!',
-                                      style: TextStyle(color: _themeColor, fontSize: 18),
+                                      style: TextStyle(color: Color.fromARGB(255, 60, 138, 62), fontSize: 18),
                                     ),
                                   ),
                                 ),

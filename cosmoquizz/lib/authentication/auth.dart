@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Authentication {
-  // create a new account
+  // create new account
   static Future<User?> registration({
     required String username,
     required String email,
@@ -41,7 +41,7 @@ class Authentication {
     return user;
   }
 
-  // log in with an existing account
+  // login with an existing account
   static Future<User?> signIn({
     required String email,
     required String password,

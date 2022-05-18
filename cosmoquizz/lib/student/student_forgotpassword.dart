@@ -152,13 +152,13 @@ Widget emailConfirmation(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "An email containing further instructions to recover password has been sent, please check your email.",
+          "An email containing further instructions to recover password has been sent, please check your email inbox.",
           style: TextStyle(fontSize: 18),
         ),
       ],
     ),
     actions: <Widget>[
-      // return button
+      // back button
       TextButton(
         onPressed: () {
           Navigator.push(
@@ -167,7 +167,7 @@ Widget emailConfirmation(BuildContext context) {
           );
         },
         child: Text(
-          'Return to Login Page',
+          'Back to Login Page',
           style: TextStyle(
             color: Color.fromARGB(255, 33, 100, 243),
             fontSize: 16,
@@ -175,6 +175,7 @@ Widget emailConfirmation(BuildContext context) {
         ),
       ),
       SizedBox(width: 20),
+      // close button
       TextButton(
         onPressed: () {
           Navigator.of(context).pop();
