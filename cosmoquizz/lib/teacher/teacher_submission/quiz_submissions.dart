@@ -120,6 +120,7 @@ class _QuizSubmissionsState extends State<QuizSubmissions> {
                                   onPressed: () {
                                     // pop-up message
                                     showDialog(
+                                      barrierDismissible: false,
                                       context: context,
                                       builder: (BuildContext context) => GradeConfirmation(username: submissions[i], quizName: _quizName),
                                     );

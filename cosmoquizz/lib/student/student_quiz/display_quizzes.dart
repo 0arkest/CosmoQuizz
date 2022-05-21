@@ -113,6 +113,7 @@ class _DisplayQuizzesState extends State<DisplayQuizzes> {
                                   onPressed: () {
                                     // pop-up message
                                     showDialog(
+                                      barrierDismissible: false,
                                       context: context,
                                       builder: (BuildContext context) => QuizConfirmation(quizName: quizzes[i]),
                                     );

@@ -68,7 +68,7 @@ class _TRexGameWrapperState extends State<TRexGameWrapper> {
           SizedBox(height: 60),
           Center(
             child: Text(
-              'Failed to load.',
+              'Failed to Load.',
               style: TextStyle(color: Colors.red, fontSize: 25),
             ),
           ),
@@ -188,6 +188,7 @@ class _GameTimerState extends State<GameTimer> {
           timer.cancel();
           // pop-up message
           showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (BuildContext context) => timeOut(context),
           );

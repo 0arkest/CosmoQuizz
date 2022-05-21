@@ -426,6 +426,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                                           });
                                           // pop-up message
                                           showDialog(
+                                            barrierDismissible: false,
                                             context: context,
                                             builder: (BuildContext context) => submitConfirmation(context),
                                           );
@@ -455,7 +456,7 @@ class _GradeSubmissionState extends State<GradeSubmission> {
                     children: <Widget>[
                       SizedBox(height: 60),
                       Text(
-                        'This Submission Is No Longer Available',
+                        'This Submission Is No Longer Available.',
                         style: TextStyle(fontSize: 25, color: Colors.red),
                       ),
                     ]

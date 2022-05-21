@@ -110,6 +110,7 @@ class _StudentForgotPWState extends State<StudentForgotPW> {
                                           });
                                           // pop-up message
                                           showDialog(
+                                            barrierDismissible: false,
                                             context: context,
                                             builder: (BuildContext context) => emailConfirmation(context),
                                           );

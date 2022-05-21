@@ -143,6 +143,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                       uploadFile();
                       // pop-up message
                       showDialog(
+                        barrierDismissible: false,
                         context: context,
                         builder: (BuildContext context) => createConfirmation(context),
                       );

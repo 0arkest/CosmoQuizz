@@ -315,6 +315,12 @@ class _StudentHomeState extends State<StudentHome> {
                             setState(() {
                               _isSendingVerification = false;
                             });
+                            // pop-up message
+                            showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) => sentVerification(context),
+                            );
                           }
                         },
                         child: Text(
@@ -337,4 +343,36 @@ class _StudentHomeState extends State<StudentHome> {
       ),
     );
   }
+}
+
+// pop-up message after clicked verify email button
+Widget sentVerification(BuildContext context) {
+  return AlertDialog(
+    title: Text('Email Sent!', style: TextStyle(fontSize: 20)),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "An email containing further instructions to verify email has been sent, please check your email inbox.",
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      // close button
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: Text(
+          'Close',
+          style: TextStyle(
+            color: Color.fromARGB(255, 33, 89, 243),
+            fontSize: 16,
+          ),
+        ),
+      ),
+    ],
+  );
 }
