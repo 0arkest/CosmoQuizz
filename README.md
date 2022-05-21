@@ -30,4 +30,4 @@ https://rchc44.github.io/cosmoquizz_web/#/
 Known Issues:
 1. Since Heroku set a limit on free access, pages that required API connections would load more slowly. Wait patiently.
 
-~~2. As student, the timeout pop-out window still appears even if you have already submitted the quiz. Click anywhere outside the pop-out window to ignore the timeout message.~~ Fixed.
+~~2. As student, the timeout pop-out window still appears even if you have already submitted the quiz. Click anywhere outside the pop-out window to ignore the timeout message.~~ The bug that appeared in the recording has been fixed.
