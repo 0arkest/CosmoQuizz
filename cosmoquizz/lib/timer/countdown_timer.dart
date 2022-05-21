@@ -15,7 +15,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   Timer? _timer;
 
   // set maximum time for quiz
-  final _maxSeconds = 10;
+  final _maxSeconds = 60;
 
   int _currentSecond = 0;
 
