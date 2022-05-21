@@ -409,5 +409,3 @@ Widget submitConfirmation(BuildContext context) {
     ],
   );
 }
-
-
