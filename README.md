@@ -14,6 +14,7 @@ FOR kids who are having trouble paying attention, controlling impulsive behavior
 2. CD into cosmoquizz
 3. Run command "flutter pub get"
 4. Run command "flutter run -d chrome"
+Flutter has to be installed on your computer.
 
 ### Technology Stack
 * Frontend: Flutter/Dart
